@@ -1,0 +1,27 @@
+$background-color : #161623;
+$font-primary-color : white;
+$font : "montserrat", serif, sans-serif;
+
+::ng-deep *{
+    margin: 0;
+    padding: 0;
+    font-family: $font; 
+}
+
+.container{
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    box-shadow: 10px 10px 30px rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    fa-icon{
+        margin: 5px;
+        font-size: 1.5rem;
+        color: $font-primary-color;
+    }
+}
