@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { RessourseService } from 'src/app/Services/ressoursesService/ressourse.service';
 
 @Component({
   selector: 'app-project1',
@@ -10,9 +12,14 @@ export class Project1Component implements OnInit {
 
   public arrowLeft = faArrowLeft;
 
-  constructor() { }
+
+
+  constructor(
+
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -7,6 +7,97 @@ $font : "montserrat", serif, sans-serif;
     padding: 0;
     font-family: $font; 
 }
+.return{
+    position: absolute;
+    top: 0px;
+    z-index: 0;
+    background: chartreuse;
+    height: 20px;
+    width: 20px;
+    .icon{
+        position: absolute;
+        z-index: 3;
+        font-size: 1.2rem;
+        bottom: 10px;
+        right: 60px;
+        color: red;
+    }
+}
+.post{
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    textarea{
+        width: 80%;
+        height: 100px;
+        border-radius: 15px;
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        color: $font-primary-color;
+        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+        outline: none;
+        padding: 10px;
+        &::placeholder{
+            color: white;
+        }
+    }
+    .button{
+        width: 80%;
+        height: 30px;
+        border-radius: 15px;
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        color: $font-primary-color;
+        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+        outline: none;
+        padding: 10px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        justify-content: space-around;
+        .input-file{
+            display: none;
+        }
+        .label-file{
+            background: rgba(255, 255, 255, 0.5);
+            padding: 5px;
+            border-radius: 15px;
+            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            outline: none;
+        }
+        button{
+            background: rgba(255, 255, 255, 0.5);
+            padding: 5px;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            outline: none;
+            color: white;
+            height: 30px;
+            width: 100px;
+            font-size: 1rem;
+        }
+    }
+
+}
 .container{
     display: flex;
     justify-content: center;
@@ -51,7 +142,7 @@ $font : "montserrat", serif, sans-serif;
         padding: 10px;
         display: flex;
         flex-wrap: wrap;
-        margin: 20px 0;
+        margin: 340px 0 0;
     }
     .card{
         position: relative;
@@ -115,3 +206,61 @@ $font : "montserrat", serif, sans-serif;
         }
     }
 }
+  /* Reset Select */
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: rgba(255, 255, 255, 0.1);
+    background-image: none;
+    backdrop-filter: blur(5px);
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select */
+  .select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: .25em;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+  }
+  select {
+    flex: 1;
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+  }
+  /* Arrow */
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+    
+  }
+  /* Transition */
+  .select:hover::after {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  

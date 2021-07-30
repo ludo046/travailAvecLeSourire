@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,13 +6,11 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent{
 
   public powerOf = faPowerOff;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  disconnect():void{
+    sessionStorage.clear()
   }
-
 }

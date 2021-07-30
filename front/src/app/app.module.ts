@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './Components/register/register.component';
@@ -20,6 +22,8 @@ import { Project7Component } from './Components/Home/dev/projects/project7/proje
 import { ProjectFront1Component } from './Components/Home/dev-front/projects/project-front1/project-front1.component';
 import { ProjectFront2Component } from './Components/Home/dev-front/projects/project-front2/project-front2.component';
 import { ProjectFront3Component } from './Components/Home/dev-front/projects/project-front3/project-front3.component';
+import { AuthInterceptor } from './auth-interceptor';
+
 
 export const ROUTES : Routes = [
   {path : 'register', component: RegisterComponent},
@@ -61,8 +65,11 @@ export const ROUTES : Routes = [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

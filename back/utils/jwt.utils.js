@@ -14,7 +14,7 @@ module.exports = {
         JWT_SIGN_SECRET,
         {
             //le token expire 24h apres sa creation 
-            expiresIn: '24h'
+            expiresIn: '2000h'
         })
     },
     parseAuthorization: function(authorization){

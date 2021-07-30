@@ -15,81 +15,7 @@ fa-icon{
     left: 10px;
     color: $font-primary-color;
 }
-.post{
-    position: absolute;
-    z-index: 1;
-    top: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    textarea{
-        width: 80%;
-        height: 100px;
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        color: $font-primary-color;
-        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-        outline: none;
-        padding: 10px;
-        &::placeholder{
-            color: white;
-        }
-    }
-    .button{
-        width: 80%;
-        height: 30px;
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        color: $font-primary-color;
-        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-        outline: none;
-        padding: 10px;
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        justify-content: space-around;
-        .input-file{
-            display: none;
-        }
-        .label-file{
-            background: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-            border-radius: 15px;
-            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-left: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            outline: none;
-        }
-        button{
-            background: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-            border-radius: 15px;
-            border: none;
-            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-left: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            outline: none;
-            color: white;
-            height: 30px;
-            width: 100px;
-            font-size: 1rem;
-        }
-    }
 
-}
 .container{
     display: flex;
     justify-content: center;
@@ -125,7 +51,7 @@ fa-icon{
         flex-direction: column;
         width: 100%;
         align-items: center;
-        margin-top: 250px;
+        margin-top: 50px;
     }
     .card{
         width: 90%;
