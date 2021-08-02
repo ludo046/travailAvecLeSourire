@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
+import { Ressources } from 'src/app/Models/ressource.model';
 import { RessourseService } from 'src/app/Services/ressoursesService/ressourse.service';
 
 @Component({
@@ -11,15 +13,28 @@ import { RessourseService } from 'src/app/Services/ressoursesService/ressourse.s
 export class Project1Component implements OnInit {
 
   public arrowLeft = faArrowLeft;
-
+  ressourcesSub: Subscription;
+  ressources: Ressources[];
+  errorMsg
 
 
   constructor(
-
+    private ressourceService: RessourseService
   ) { }
 
   ngOnInit(): void {
-
+    this.ressourcesSub = this.ressourceService.allRessources$.subscribe(
+      (ressources) => {
+        this.ressources = ressources;
+        console.log(this.ressources);
+        
+      },
+      (error) => {
+        console.log(error);
+        this.errorMsg = JSON.stringify(error);
+      }
+    );
+    this.ressourceService.getAllRessources()
   }
 
 }

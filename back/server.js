@@ -4,6 +4,9 @@ const apiRouter = require('./apiRouter').router;
 const path = require('path');
 const helmet = require('helmet')
 require('dotenv').config();
+const db = require("./models");
+db.sequelize.sync();
+//db.sequelize.sync({force: true});
 
 
 //instantiate server

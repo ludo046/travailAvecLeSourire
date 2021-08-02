@@ -1,43 +1,46 @@
 "use strict";
 
 module.exports = (sequelize, Sequelize) => {
-  const Users = sequelize.define(
-    "users",
+  const Ressources = sequelize.define(
+    "ressource",
     {
       id:{
         autoIncrement: true,
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
-      firstname: {
+      userId: {
         allowNull: false,
-        type : Sequelize.STRING(100),
+        type : Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id"
+        }
       },
-      lastname: {
+      title: {
         allowNull: false,
         type: Sequelize.STRING(100)
       },
-      age: {
+      content: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(5000)
       },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING(255),
-        unique: "email_UNIQUE"
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING(255)
-      },
-      picture: {
+      image: {
         allowNull: true,
         type: Sequelize.STRING(255)
       },
-      isAdmin: {
+      movie: {
+        allowNull: true,
+        type: Sequelize.STRING(255)
+      },
+      project: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING(100)
+      },
+      parcours: {
+        allowNull: false,
+        type: Sequelize.STRING(100),
       },
       createdAt: {
         allowNull: false,
@@ -52,7 +55,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     {
       sequelize,
-      tableName: "users",
+      tableName: "ressource",
       timestamps: false,
       indexes: [
         {
@@ -62,13 +65,17 @@ module.exports = (sequelize, Sequelize) => {
           fields: [{ name: "id" }],
         },
         {
-          name: "email_UNIQUE",
-          unique: true,
+          name: "ordreDate",
           using: "BTREE",
-          fields: [{ name: "email" }],
+          fields: [{ name: "createdAt" }],
+        },
+        {
+          name: "fk_ressource_user_idx",
+          using: "BTREE",
+          fields: [{ name: "userId" }],
         },
       ],
     }
   );
-  return Users;
+  return Ressources;
 }

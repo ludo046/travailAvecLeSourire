@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject } from 'rxjs';
 import { RessourseService } from 'src/app/Services/ressoursesService/ressourse.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class DevComponent implements OnInit {
 
   public arrowLeft = faArrowLeft;
   public file: File;
-  public ressourceForm: FormGroup
+  public ressourceForm: FormGroup;
+  public allRessources = new BehaviorSubject([]);
 
   constructor(
     private formbuilder: FormBuilder,
@@ -20,6 +22,7 @@ export class DevComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //this.getAllRessources()
     this.ressourceForm = this.formbuilder.group({
       content: this.formbuilder.control('',Validators.required),
       attachment: this.formbuilder.control('',Validators.required),
@@ -42,4 +45,12 @@ export class DevComponent implements OnInit {
 
     this.ressoursesService.postRessource(content,project,attachment,parcour).subscribe()
   }
+
+  // getAllRessources(){
+  //   this.ressoursesService.getAllRessources().subscribe((ressources) => {
+  //     this.allRessources = ressources
+  //     console.log(this.allRessources);
+      
+  //   })
+  // }
 }

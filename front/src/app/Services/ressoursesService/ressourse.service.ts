@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { postRessourseModel } from 'src/app/Models/ressource.model';
-import { Observable } from 'rxjs';
+import { Ressources } from 'src/app/Models/ressource.model';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class RessourseService {
 
 private ressoucesUrl = environment.ressourceUrl;
 public formData : any;
+allRessources$ = new Subject<any>();
 
   constructor(
     private httpClient: HttpClient
@@ -23,6 +24,18 @@ public formData : any;
     formData.append('image', attachment);
     formData.append('parcour', parcour);
     return this.httpClient.post(`${this.ressoucesUrl}new`,formData)
+  }
+
+  getAllRessources():void{
+    this.httpClient.get(`${this.ressoucesUrl}`).subscribe(
+      (ressources) => {
+        this.allRessources$.next(ressources);
+      },
+      (error) => {
+        this.allRessources$.next([]);
+        console.error(error);
+      }
+    )
   }
 
 }

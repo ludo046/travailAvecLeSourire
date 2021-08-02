@@ -12,7 +12,8 @@ exports.router = (function(){
     apiRouter.route('/users/register/').post(userCtrl.register);
     apiRouter.route('/users/login/').post(userCtrl.login);
 
-    apiRouter.route('/ressources/new/').post(multer,ressourceCtrl.postRessources)
+    apiRouter.route('/ressources/new/').post(multer,ressourceCtrl.postRessources);
+    apiRouter.route('/ressources/').get(ressourceCtrl.listRessource);
 
     return apiRouter
 })();

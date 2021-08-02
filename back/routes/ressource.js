@@ -69,13 +69,14 @@ module.exports = {
             function (userFound, done) {
               console.log(userFound.id);
               if (userFound) {
-                models.Ressourse.create({
+                models.Ressource.create({
                   userId: userFound.id,
+                  title: 'un titre',
                   content: content,
                   project: project,
                   attachment: attachment,
                   movie: movie,
-                  parcour: parcour,
+                  parcours: parcour,
                   isAdmin: false
                 }).then(function (newRessource) {
                   done(newRessource);
@@ -99,5 +100,33 @@ module.exports = {
     } catch (error) {
       res.status(400).json({ error });
     }
+  },
+
+  listRessource: function (req, res) {
+    let fields = req.query.fields;
+    let order = req.query.order;
+
+    models.Ressource.findAll({
+      order: [order != null ? order.split(":") : ["id", "DESC"]], 
+      attributes: fields !== "*" && fields != null ? fields.split(",") : null,
+      include: [
+        {
+          model: models.User,
+          attributes: ["firstname", "lastname"],
+          as: "user_ressource"
+        },
+      ],
+    })
+      .then(function (ressource) {
+        if (ressource) {
+          res.status(200).json(ressource);
+        } else {
+          res.status(404).json({ error: "aucune ressources trouvée" });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.status(500).json({ error: "invalid fields" });
+      });
   },
 }
