@@ -1,9 +1,11 @@
 const models = require("../models");
 const asyncLib = require("async");
 const jwtUtils = require("../utils/jwt.utils");
-//const fs = require("fs");
-const { invalid } = require("joi");
+const fs = require("fs");
+const { invalid, func } = require("joi");
 const postRessourceSchema = require("../utils/joi/postRessourceSchema");
+const updateRessourceSchema = require('../utils/joi/updateSchema')
+const user = require("../models/user");
 
 const CONTENT_LIMIT = 5000;
 
@@ -15,6 +17,7 @@ module.exports = {
         let headerAuth = req.headers["authorization"];
         let userId = jwtUtils.getUserId(headerAuth);
 
+        let title = null
         let content = null;
         let project = null;
         let attachment = null;
@@ -29,6 +32,12 @@ module.exports = {
           }
         }
 
+        if(req.body.title){
+          title = String(req.body.title)
+          if(title === null){
+            return res.status(400).json({error: 'entrer un titre'});
+          }
+        }
         if (req.body.content) {
           content = String(req.body.content);
           if (content.length > CONTENT_LIMIT) {
@@ -71,10 +80,10 @@ module.exports = {
               if (userFound) {
                 models.Ressource.create({
                   userId: userFound.id,
-                  title: 'un titre',
+                  title: title,
                   content: content,
                   project: project,
-                  attachment: attachment,
+                  image: attachment,
                   movie: movie,
                   parcours: parcour,
                   isAdmin: false
@@ -102,13 +111,16 @@ module.exports = {
     }
   },
 
-  listRessource: function (req, res) {
+  listRessourceDeveloppeurWeb: function (req, res) {
     let fields = req.query.fields;
     let order = req.query.order;
 
     models.Ressource.findAll({
       order: [order != null ? order.split(":") : ["id", "DESC"]], 
       attributes: fields !== "*" && fields != null ? fields.split(",") : null,
+      where:{
+        parcours: 'developpeur-web'
+      },
       include: [
         {
           model: models.User,
@@ -128,5 +140,258 @@ module.exports = {
         console.log(err);
         res.status(500).json({ error: "invalid fields" });
       });
+  },
+
+  listRessourceDeveloppeurFrontend: function (req, res) {
+    let fields = req.query.fields;
+    let order = req.query.order;
+
+    models.Ressource.findAll({
+      order: [order != null ? order.split(":") : ["id", "DESC"]], 
+      attributes: fields !== "*" && fields != null ? fields.split(",") : null,
+      where:{
+        parcours: 'developpeur-frontend'
+      },
+      include: [
+        {
+          model: models.User,
+          attributes: ["firstname", "lastname"],
+          as: "user_ressource"
+        },
+      ],
+    })
+      .then(function (ressource) {
+        if (ressource) {
+          res.status(200).json(ressource);
+        } else {
+          res.status(404).json({ error: "aucune ressources trouvée" });
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.status(500).json({ error: "invalid fields" });
+      });
+  },
+
+  deleteRessourceDevWeb: function(req,res){
+    let headerAuth = req.headers["authorization"];
+    let userId = jwtUtils.getUserId(headerAuth);
+    let ressourceId = parseInt(req.params.ressourceId)
+
+    if(userId <= 0){
+      return res.status(400).json({error: "utilisateur non reconnu"})
+    }
+    if(ressourceId <= 0){
+      return res.status(400).json({error: "ressource non reconnu"})
+    }
+
+    models.Ressource.findOne({
+      where:{
+        userId: userId,
+        id: ressourceId,
+        parcours: 'developpeur-web'
+      }
+    })
+    .then(function(ressource){
+      if(ressource.image){
+        const filename = ressource.image.split("/images/")[1];
+        fs.unlink(`images/${filename}`,() =>{
+          models.Ressource.destroy({
+            where:{
+              userId: userId,
+              id: ressourceId
+            }
+          })
+          .then(function(){
+            res.status(201).json(({ok: "ressource supprimée"}))
+          })
+          .catch(function (err){
+            res.status(400).json({ err });
+          })
+        });
+      } else if(ressource.movie){
+        const filename = ressource.movie.split("/images/")[1];
+        fs.unlink(`images/${filename}`,() =>{
+          models.Ressource.destroy({
+            where:{
+              userId: userId,
+              id: ressourceId
+            }
+          })
+          .then(function(){
+            res.status(201).json(({ok: "ressource supprimée"}))
+          })
+          .catch(function (err){
+            res.status(400).json({ err });
+          })
+        });
+      } else {
+        models.Ressource.destroy({
+          where:{
+            userId: userId,
+            id: ressourceId
+          }
+        })
+        .then(function(){
+          res.status(201).json(({ok: "ressource supprimée"}))
+        })
+        .catch(function (err){
+          res.status(400).json({ err });
+        })
+      }
+    })
+    .catch(function(err){
+      res.status(400).json({ err });
+    })
+  },
+
+  deleteRessourceDevFront: function(req,res){
+    let headerAuth = req.headers["authorization"];
+    let userId = jwtUtils.getUserId(headerAuth);
+    let ressourceId = parseInt(req.params.ressourceId)
+
+    if(userId <= 0){
+      return res.status(400).json({error: "utilisateur non reconnu"})
+    }
+    if(ressourceId <= 0){
+      return res.status(400).json({error: "ressource non reconnu"})
+    }
+
+    models.Ressource.findOne({
+      where:{
+        userId: userId,
+        id: ressourceId,
+        parcours: 'developpeur-frontend'
+      }
+    })
+    .then(function(ressource){
+      if(ressource.image){
+        const filename = ressource.image.split("/images/")[1];
+        fs.unlink(`images/${filename}`,() =>{
+          models.Ressource.destroy({
+            where:{
+              userId: userId,
+              id: ressourceId
+            }
+          })
+          .then(function(){
+            res.status(201).json(({ok: "ressource supprimée"}))
+          })
+          .catch(function (err){
+            res.status(400).json({ err });
+          })
+        });
+      } else if(ressource.movie){
+        const filename = ressource.movie.split("/images/")[1];
+        fs.unlink(`images/${filename}`,() =>{
+          models.Ressource.destroy({
+            where:{
+              userId: userId,
+              id: ressourceId
+            }
+          })
+          .then(function(){
+            res.status(201).json(({ok: "ressource supprimée"}))
+          })
+          .catch(function (err){
+            res.status(400).json({ err });
+          })
+        });
+      } else {
+        models.Ressource.destroy({
+          where:{
+            userId: userId,
+            id: ressourceId
+          }
+        })
+        .then(function(){
+          res.status(201).json(({ok: "ressource supprimée"}))
+        })
+        .catch(function (err){
+          res.status(400).json({ err });
+        })
+      }
+    })
+    .catch(function(err){
+      res.status(400).json({ err });
+    })
+  },
+
+  modifyRessource: async function(req, res){
+    try{
+      const valid = await updateRessourceSchema.validateAsync(req.body);
+      if(valid){
+        let headerAuth = req.headers["authorization"];
+        let userId = jwtUtils.getUserId(headerAuth);
+        const ressourceId = req.params.ressourceId;
+
+        let title = null
+        let content = null;
+        let attachment = null;
+        let movie = null;
+
+        if (req.file) {
+          let media = req.file.filename;
+          if (media.includes("mp4")) {
+            movie = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+          } else {
+            attachment = String(`${req.protocol}://${req.get("host")}/images/${req.file.filename}`);
+          }
+        }
+        if(req.body.title){
+          title = req.body.title
+        }
+        if(req.body.content){
+          content = req.body.content
+        }
+
+        models.Ressource.findOne({
+          where:{
+            id: ressourceId
+          }
+        })
+        .then(function(modifyRessource){
+          if(modifyRessource.attachment && content){
+            const filename = modifyRessource.picture.split("/images/")[1];
+            fs.unlink(`images/${filename}`, (err) =>{
+              return modifyRessource.update({
+                title: title ? title : modifyRessource.title,
+                content: content ? content : modifyRessource.content,
+                image: attachment ? attachment : modifyRessource.attachment,
+                movie: movie ? movie : modifyRessource.movie,
+                console.log(err)
+              });
+            });
+          } else if(modifyRessource.movie && content){
+            const filename = modifyRessource.movie.split("/images/")[1];
+            fs.unlink(`images/${filename}`, () =>{
+              return modifyRessource.update({
+                title: title ? title : modifyRessource.title,
+                content: content ? content : modifyRessource.content,
+                image: attachment ? attachment : modifyRessource.attachment,
+                movie: movie ? movie : modifyRessource.movie,
+              });
+            });
+          } else {
+            return modifyRessource.update({
+              title: title ? title : modifyRessource.title,
+              content: content ? content : modifyRessource.content,
+              image: attachment ? attachment : modifyRessource.attachment,
+              movie: movie ? movie : modifyRessource.movie,
+            });
+          }
+        })
+        .then(function(ressource){
+          return res.status(201).json(ressource)
+        })
+        .catch(function(err){
+          res.status(500).json({err});
+        })
+      } else {
+        throw error(invalid)
+      }
+    }catch(error){
+      res.status(400).json({error})
+    }
   },
 }

@@ -13,7 +13,11 @@ exports.router = (function(){
     apiRouter.route('/users/login/').post(userCtrl.login);
 
     apiRouter.route('/ressources/new/').post(multer,ressourceCtrl.postRessources);
-    apiRouter.route('/ressources/').get(ressourceCtrl.listRessource);
+    apiRouter.route('/ressources/devWeb').get(ressourceCtrl.listRessourceDeveloppeurWeb);
+    apiRouter.route('/ressources/devFront').get(ressourceCtrl.listRessourceDeveloppeurFrontend);
+    apiRouter.route('/ressources/deleteDevWeb/:ressourceId').delete(ressourceCtrl.deleteRessourceDevWeb);
+    apiRouter.route('/ressources/deleteDevFront/:ressourceId').delete(ressourceCtrl.deleteRessourceDevFront);
+    apiRouter.route('/ressources/modifyDevWeb/:ressourceId').put(ressourceCtrl.modifyRessource);
 
     return apiRouter
 })();

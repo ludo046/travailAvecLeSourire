@@ -24,9 +24,10 @@ export class DevComponent implements OnInit {
   ngOnInit(): void {
     //this.getAllRessources()
     this.ressourceForm = this.formbuilder.group({
+      title: this.formbuilder.control('',Validators.required),
       content: this.formbuilder.control('',Validators.required),
       attachment: this.formbuilder.control('',Validators.required),
-      project: this.formbuilder.control('',Validators.required)
+      project: this.formbuilder.control('',Validators.required),
     })
   }
 
@@ -38,19 +39,14 @@ export class DevComponent implements OnInit {
   }
 
   postRessource():void{
+    const title = this.ressourceForm.get('title').value;
     const content = this.ressourceForm.get('content').value;
     const project = this.ressourceForm.get('project').value;
     const attachment = this.file;
-    const parcour = window.location.href.split('/')[3]
+    const parcours = window.location.href.split('/')[3]
+    
+    
 
-    this.ressoursesService.postRessource(content,project,attachment,parcour).subscribe()
+    this.ressoursesService.postRessource(content,project,attachment,parcours,title).subscribe()
   }
-
-  // getAllRessources(){
-  //   this.ressoursesService.getAllRessources().subscribe((ressources) => {
-  //     this.allRessources = ressources
-  //     console.log(this.allRessources);
-      
-  //   })
-  // }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { Ressources } from 'src/app/Models/ressource.model';
@@ -16,14 +15,15 @@ export class Project1Component implements OnInit {
   ressourcesSub: Subscription;
   ressources: Ressources[];
   errorMsg
+  public connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
 
 
   constructor(
-    private ressourceService: RessourseService
+    private ressourceService: RessourseService,
   ) { }
 
   ngOnInit(): void {
-    this.ressourcesSub = this.ressourceService.allRessources$.subscribe(
+    this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
       (ressources) => {
         this.ressources = ressources;
         console.log(this.ressources);
@@ -34,7 +34,7 @@ export class Project1Component implements OnInit {
         this.errorMsg = JSON.stringify(error);
       }
     );
-    this.ressourceService.getAllRessources()
+    this.ressourceService.getAllRessourcesDevWeb()
   }
 
 }

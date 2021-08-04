@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="return">
+    <fa-icon [icon]="arrowLeft" routerLink="/home" class="icon"></fa-icon>
+</div>
+<div class="container">
+    <form [formGroup]="modifyWebRessource">
+        <input type="text" class="form-control" formControlName="title">
+        <textarea class="form-control" formControlName="content"></textarea>
+        <div class="button">
+    <div class="button">
+        <div>
+            <label for="file" class="label-file">Image / Vidéo</label>
+            <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">           
+        </div>
+        <button (click)="updateDevRessource()">Envoyer</button>
+    </div>
+        </div>
+    </form>
+</div>

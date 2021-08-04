@@ -1,6 +1,9 @@
 export interface postRessourseModel{
-    content: String;
-    attachment: File;
+    content: string;
+    project: string;
+    attachment: File
+    parcours: string;
+    title:string;
 }
 
 export interface Ressources{
@@ -15,4 +18,11 @@ export interface Ressources{
         firstname: string,
         lastname: string
     }
+}
+
+export interface UpdateRessourseModel{
+    content: string;
+    project: string;
+    attachment: File
+    title:string;
 }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog'
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './Components/register/register.component';
@@ -23,6 +24,11 @@ import { ProjectFront1Component } from './Components/Home/dev-front/projects/pro
 import { ProjectFront2Component } from './Components/Home/dev-front/projects/project-front2/project-front2.component';
 import { ProjectFront3Component } from './Components/Home/dev-front/projects/project-front3/project-front3.component';
 import { AuthInterceptor } from './auth-interceptor';
+import { DevWebDeleteComponent } from './Components/Home/ressourceAction/deleteRessource/dev-web-delete/dev-web-delete.component';
+import { DevFrontDeleteComponent } from './Components/Home/ressourceAction/deleteRessource/dev-front-delete/dev-front-delete.component';
+import { ModifyDevFrontComponent } from './Components/Home/ressourceAction/modifyRessource/modify-dev-front/modify-dev-front.component';
+import { ModifyDevWebComponent } from './Components/Home/ressourceAction/modifyRessource/modify-dev-web/modify-dev-web.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export const ROUTES : Routes = [
@@ -38,6 +44,9 @@ export const ROUTES : Routes = [
   {path : 'developpeur-web-p5', component: Project5Component},
   {path : 'developpeur-web-p6', component: Project6Component},
   {path : 'developpeur-web-p7', component: Project7Component},
+  {path : 'dev-front-p1', component: ProjectFront1Component},
+  {path : 'modify-dev-web-ressource/:ressourceId', component: ModifyDevWebComponent},
+  {path : 'modify-dev-front-ressource/:ressourceId', component: ModifyDevFrontComponent},
   {path : '', component: RegisterComponent}
 ]
 
@@ -60,6 +69,10 @@ export const ROUTES : Routes = [
     ProjectFront1Component,
     ProjectFront2Component,
     ProjectFront3Component,
+    DevWebDeleteComponent,
+    DevFrontDeleteComponent,
+    ModifyDevFrontComponent,
+    ModifyDevWebComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +81,8 @@ export const ROUTES : Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, HttpClient],
   bootstrap: [AppComponent]

@@ -8,15 +8,9 @@ const sendPostSchema = Joi.object({
             .allow(null,'')
             .max(1200),
 
-            project: Joi.string()
-            .required(),
-
-
             image: Joi.any(),
 
             movie: Joi.any(),
 
-            parcour: Joi.string()
-            .required()
 })
     module.exports = sendPostSchema;

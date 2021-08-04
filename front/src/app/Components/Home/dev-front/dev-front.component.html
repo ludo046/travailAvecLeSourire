@@ -3,6 +3,7 @@
     <fa-icon [icon]="arrowLeft" routerLink="/home" class="icon"></fa-icon>
 </div>
 <div class="post" [formGroup]="ressourceForm"> 
+    <input type="text" class="form-control" formControlName="title" placeholder="titre"> 
     <textarea name="" id="" cols="30" rows="10" placeholder="votre ressource" class="form-control" formControlName="content"></textarea>
     <div class="select">
         <select name="project" id="select-project" class="form-control" formControlName="project">
@@ -34,7 +35,7 @@
                 </div>
                 <div class="front">
                     <h3>Projet 1</h3>
-                    <button>Accès aux ressources</button>
+                    <button routerLink="/dev-front-p1">Accès aux ressources</button>
                 </div>
             </div>
         </div>

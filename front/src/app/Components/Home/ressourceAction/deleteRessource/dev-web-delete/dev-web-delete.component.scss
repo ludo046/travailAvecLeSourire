@@ -1,0 +1,22 @@
+$background-color : #161623;
+$font-primary-color : white;
+$font : "montserrat", serif, sans-serif;
+
+
+button{
+    height: 30px;
+    width: 130px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 10px;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    color: $font-primary-color;
+    box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

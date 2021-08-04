@@ -22,7 +22,7 @@ export class Project6Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ressourcesSub = this.ressourceService.allRessources$.subscribe(
+    this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
       (ressources) => {
         this.ressources = ressources;
         console.log(this.ressources);
@@ -33,7 +33,7 @@ export class Project6Component implements OnInit {
         this.errorMsg = JSON.stringify(error);
       }
     );
-    this.ressourceService.getAllRessources()
+    this.ressourceService.getAllRessourcesDevWeb()
   }
 
 }
