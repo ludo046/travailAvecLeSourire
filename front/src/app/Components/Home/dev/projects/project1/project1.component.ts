@@ -25,7 +25,7 @@ export class Project1Component implements OnInit {
   ngOnInit(): void {
     this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
       (ressources) => {
-        this.ressources = ressources;
+        this.ressources = ressources.sort(function);
         console.log(this.ressources);
         
       },

@@ -15,12 +15,15 @@ fa-icon{
     left: 10px;
     color: $font-primary-color;
 }
+
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: $background-color;
+    display: flex;
+    flex-direction: column;
     &::before{
         content: '';
         position: absolute;
@@ -41,8 +44,15 @@ fa-icon{
         background: linear-gradient(#2196f3, #e91e63);
         clip-path: circle(20% at 10% 10%);
     }
+    .all-card{
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 50px;
+    }
     .card{
-        width: 90%;
+        width: 80%;
         z-index: 1;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 15px;
@@ -53,12 +63,20 @@ fa-icon{
         backdrop-filter: blur(5px);
         color: $font-primary-color;
         box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+        margin: 20px auto 0;
+        .top-card{
+            display: flex;
+        }
         h1{
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
         p{
             margin: 10px 0;
+        }
+        img{
+            width: 100%;
+            border-radius: 15px;
         }
         .date{
             margin-top: 20px;
@@ -67,6 +85,30 @@ fa-icon{
             p{
                 margin: 5px 0;
             }
+            .button{
+                display: flex;
+                justify-content: space-around;
+                margin: 15px 0;
+                button{
+                    height: 30px;
+                    width: 130px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 15px;
+                    padding: 10px;
+                    overflow: hidden;
+                    border-top: 1px solid rgba(255, 255, 255, 0.5);
+                    border-left: 1px solid rgba(255, 255, 255, 0.5);
+                    backdrop-filter: blur(5px);
+                    color: $font-primary-color;
+                    box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
         }
     }
 }
+
+

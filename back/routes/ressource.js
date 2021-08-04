@@ -351,35 +351,27 @@ module.exports = {
           }
         })
         .then(function(modifyRessource){
+          let filename = null;
           if(modifyRessource.attachment && content){
-            const filename = modifyRessource.picture.split("/images/")[1];
-            fs.unlink(`images/${filename}`, (err) =>{
-              return modifyRessource.update({
-                title: title ? title : modifyRessource.title,
-                content: content ? content : modifyRessource.content,
-                image: attachment ? attachment : modifyRessource.attachment,
-                movie: movie ? movie : modifyRessource.movie,
-                console.log(err)
-              });
-            });
-          } else if(modifyRessource.movie && content){
-            const filename = modifyRessource.movie.split("/images/")[1];
-            fs.unlink(`images/${filename}`, () =>{
-              return modifyRessource.update({
-                title: title ? title : modifyRessource.title,
-                content: content ? content : modifyRessource.content,
-                image: attachment ? attachment : modifyRessource.attachment,
-                movie: movie ? movie : modifyRessource.movie,
-              });
-            });
-          } else {
-            return modifyRessource.update({
-              title: title ? title : modifyRessource.title,
-              content: content ? content : modifyRessource.content,
-              image: attachment ? attachment : modifyRessource.attachment,
-              movie: movie ? movie : modifyRessource.movie,
-            });
+               filename = modifyRessource.picture.split("/images/")[1];
           }
+
+          if(modifyRessource.movie && content){
+              filename = modifyRessource.movie.split("/images/")[1];
+            }
+            fs.unlink(`app/images/${filename}`, (err) => {
+                if (err) {
+                  return console.log(err);
+                } else {
+                  console.log("image supprimée !");
+                }
+              });
+              return modifyRessource.update({
+                title: title ? title : modifyRessource.title,
+                content: content ? content : modifyRessource.content,
+                image: attachment ? attachment : modifyRessource.attachment,
+                movie: movie ? movie : modifyRessource.movie,  
+              });
         })
         .then(function(ressource){
           return res.status(201).json(ressource)
@@ -391,7 +383,7 @@ module.exports = {
         throw error(invalid)
       }
     }catch(error){
-      res.status(400).json({error})
+      res.status(400).json({message: error.message})
     }
   },
 }

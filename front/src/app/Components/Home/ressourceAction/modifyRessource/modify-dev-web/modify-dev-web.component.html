@@ -12,7 +12,7 @@
             <label for="file" class="label-file">Image / Vidéo</label>
             <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">           
         </div>
-        <button (click)="updateDevRessource()">Envoyer</button>
+        <button (click)="updateDevRessource()" routerLink="/developpeur-web-p1">Envoyer</button>
     </div>
         </div>
     </form>
