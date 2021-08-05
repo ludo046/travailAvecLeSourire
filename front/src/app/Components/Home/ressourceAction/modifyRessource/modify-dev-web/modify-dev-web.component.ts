@@ -14,16 +14,19 @@ export class ModifyDevWebComponent implements OnInit {
   public arrowLeft = faArrowLeft;
   public file: File;
   public modifyWebRessource : FormGroup;
+  public project = window.location.href.split('/')[4];
+  public singleRessource : any
 
   constructor(private formBuilder: FormBuilder,
               private ressourceService: RessourseService) { }
 
   ngOnInit(): void {
+    this.getOneRessource();
     this.modifyWebRessource = this.formBuilder.group({
       title : this.formBuilder.control(''),
       content : this.formBuilder.control(''),
       attachment : this.formBuilder.control('') 
-    })
+    });
   }
 
   onFileAdded(event: Event) {
@@ -37,15 +40,17 @@ export class ModifyDevWebComponent implements OnInit {
       const title = this.modifyWebRessource.get('title').value;
       const content = this.modifyWebRessource.get('content').value;
       const attachment = this.modifyWebRessource.get('attachment').value;
-      const ressourceId = window.location.href.split('ressource/')[1]
+      const ressourceId = window.location.href.split('ressource/')[1];
 
-      console.log(title);
-      console.log(content);
-      
-      
-      
+    this.ressourceService.updateDevRessource(title, content, attachment, ressourceId).subscribe();
+  };
 
-    this.ressourceService.updateDevRessource(title, content, attachment, ressourceId).subscribe()
-  }
-
+  getOneRessource(){
+    const ressource = window.location.href.split('ressource/')[1]
+    const ressourceId = ressource.split('/')[1]
+    this.ressourceService.getOneRessource(ressourceId).subscribe(ressource => {
+      this.singleRessource = ressource
+      console.log(this.singleRessource);
+    });
+  };
 }

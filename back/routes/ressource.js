@@ -330,6 +330,10 @@ module.exports = {
         let attachment = null;
         let movie = null;
 
+        if(userId <= 0){
+          return res.status(400).json({error : `nous n'êtes pas identifié`})
+        }
+
         if (req.file) {
           let media = req.file.filename;
           if (media.includes("mp4")) {
@@ -386,4 +390,25 @@ module.exports = {
       res.status(400).json({message: error.message})
     }
   },
-}
+  getOneRessource: function(req, res){
+    let headerAuth = req.headers["authorization"];
+    let userId = jwtUtils.getUserId(headerAuth);
+    const ressourceId = req.params.ressourceId;
+    console.log(userId);
+    console.log(ressourceId);
+
+
+    if(userId <= 0){
+      return res.status(400).json({error: `nous n'êtes pas identifié`})
+    }
+    models.Ressource.findOne({
+      where: {id: ressourceId}
+    })
+    .then(function(ressource){
+      return res.status(200).json(ressource)
+    })
+    .catch(function(err){
+      return res.status(400).json({error: "ressource inexistante"})
+    })
+  },
+};

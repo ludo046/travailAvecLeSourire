@@ -64,4 +64,7 @@ allRessourcesDevFront$ = new Subject<any>();
 
     return this.httpClient.put(`${this.ressoucesUrl}modifyDevWeb/`+ressourceId, formdata)
   }
+  getOneRessource(ressourceId: string){
+    return this.httpClient.get(`${this.ressoucesUrl}`+ressourceId)
+  }
 }

@@ -5,27 +5,27 @@ import { Ressources } from 'src/app/Models/ressource.model';
 import { RessourseService } from 'src/app/Services/ressoursesService/ressourse.service';
 
 @Component({
-  selector: 'app-project2',
-  templateUrl: './project2.component.html',
-  styleUrls: ['./project2.component.scss']
+  selector: 'app-project-front6',
+  templateUrl: './project-front6.component.html',
+  styleUrls: ['./project-front6.component.scss']
 })
-export class Project2Component implements OnInit {
+export class ProjectFront6Component implements OnInit {
 
   public arrowLeft = faArrowLeft;
   ressourcesSub: Subscription;
   ressources: Ressources[];
   errorMsg
   public connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
-
+  front = 'developpeur-frontend'
 
   constructor(
     private ressourceService: RessourseService
   ) { }
 
   ngOnInit(): void {
-    this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
+    this.ressourcesSub = this.ressourceService.allRessourcesDevFront$.subscribe(
       (ressources) => {
-        this.ressources = ressources.filter(ressources => ressources.project === 'projet2');
+        this.ressources = ressources.filter(ressources => ressources.project === 'projet1');
         console.log(this.ressources);
         
       },
@@ -34,6 +34,7 @@ export class Project2Component implements OnInit {
         this.errorMsg = JSON.stringify(error);
       }
     );
-    this.ressourceService.getAllRessourcesDevWeb()
+    this.ressourceService.getAllRessourcesDevFront()
   }
+
 }

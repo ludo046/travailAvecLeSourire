@@ -25,7 +25,7 @@ export class ProjectFront1Component implements OnInit {
   ngOnInit(): void {
     this.ressourcesSub = this.ressourceService.allRessourcesDevFront$.subscribe(
       (ressources) => {
-        this.ressources = ressources;
+        this.ressources = ressources.filter(ressources => ressources.project === 'projet1');
         console.log(this.ressources);
         
       },

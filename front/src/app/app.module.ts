@@ -29,6 +29,17 @@ import { DevFrontDeleteComponent } from './Components/Home/ressourceAction/delet
 import { ModifyDevFrontComponent } from './Components/Home/ressourceAction/modifyRessource/modify-dev-front/modify-dev-front.component';
 import { ModifyDevWebComponent } from './Components/Home/ressourceAction/modifyRessource/modify-dev-web/modify-dev-web.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectFront4Component } from './Components/Home/dev-front/projects/project-front4/project-front4.component';
+import { ProjectFront5Component } from './Components/Home/dev-front/projects/project-front5/project-front5.component';
+import { ProjectFront6Component } from './Components/Home/dev-front/projects/project-front6/project-front6.component';
+import { ProjectFront7Component } from './Components/Home/dev-front/projects/project-front7/project-front7.component';
+import { ProjectFront8Component } from './Components/Home/dev-front/projects/project-front8/project-front8.component';
+import { ProjectFront9Component } from './Components/Home/dev-front/projects/project-front9/project-front9.component';
+import { ProjectFront10Component } from './Components/Home/dev-front/projects/project-front10/project-front10.component';
+import { ProjectFront11Component } from './Components/Home/dev-front/projects/project-front11/project-front11.component';
+import { ProjectFront12Component } from './Components/Home/dev-front/projects/project-front12/project-front12.component';
+import { ProjectFront13Component } from './Components/Home/dev-front/projects/project-front13/project-front13.component';
+import { ProjectFront14Component } from './Components/Home/dev-front/projects/project-front14/project-front14.component';
 
 
 export const ROUTES : Routes = [
@@ -37,15 +48,15 @@ export const ROUTES : Routes = [
   {path : 'home', component: HomeComponent},
   {path : 'developpeur-web', component: DevComponent},
   {path : 'developpeur-frontend', component: DevFrontComponent},
-  {path : 'developpeur-web-p1', component: Project1Component},
-  {path : 'developpeur-web-p2', component: Project2Component},
-  {path : 'developpeur-web-p3', component: Project3Component},
-  {path : 'developpeur-web-p4', component: Project4Component},
-  {path : 'developpeur-web-p5', component: Project5Component},
-  {path : 'developpeur-web-p6', component: Project6Component},
-  {path : 'developpeur-web-p7', component: Project7Component},
+  {path : 'developpeur-web/projet1', component: Project1Component},
+  {path : 'developpeur-web/projet2', component: Project2Component},
+  {path : 'developpeur-web/projet3', component: Project3Component},
+  {path : 'developpeur-web/projet4', component: Project4Component},
+  {path : 'developpeur-web/projet5', component: Project5Component},
+  {path : 'developpeur-web/projet6', component: Project6Component},
+  {path : 'developpeur-web/p7', component: Project7Component},
   {path : 'dev-front-p1', component: ProjectFront1Component},
-  {path : 'modify-dev-web-ressource/:ressourceId', component: ModifyDevWebComponent},
+  {path : 'modify-dev-web-ressource/:project/:ressourceId', component: ModifyDevWebComponent},
   {path : 'modify-dev-front-ressource/:ressourceId', component: ModifyDevFrontComponent},
   {path : '', component: RegisterComponent}
 ]
@@ -72,7 +83,18 @@ export const ROUTES : Routes = [
     DevWebDeleteComponent,
     DevFrontDeleteComponent,
     ModifyDevFrontComponent,
-    ModifyDevWebComponent
+    ModifyDevWebComponent,
+    ProjectFront4Component,
+    ProjectFront5Component,
+    ProjectFront6Component,
+    ProjectFront7Component,
+    ProjectFront8Component,
+    ProjectFront9Component,
+    ProjectFront10Component,
+    ProjectFront11Component,
+    ProjectFront12Component,
+    ProjectFront13Component,
+    ProjectFront14Component
   ],
   imports: [
     BrowserModule,

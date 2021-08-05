@@ -17,7 +17,8 @@ exports.router = (function(){
     apiRouter.route('/ressources/devFront').get(ressourceCtrl.listRessourceDeveloppeurFrontend);
     apiRouter.route('/ressources/deleteDevWeb/:ressourceId').delete(ressourceCtrl.deleteRessourceDevWeb);
     apiRouter.route('/ressources/deleteDevFront/:ressourceId').delete(ressourceCtrl.deleteRessourceDevFront);
-    apiRouter.route('/ressources/modifyDevWeb/:ressourceId').put(multer,ressourceCtrl.modifyRessource);
+    apiRouter.route('/ressources/modifyDevWeb/:project/:ressourceId').put(multer,ressourceCtrl.modifyRessource);
+    apiRouter.route('/ressources/:ressourceId/').get(ressourceCtrl.getOneRessource);
 
     return apiRouter
 })();

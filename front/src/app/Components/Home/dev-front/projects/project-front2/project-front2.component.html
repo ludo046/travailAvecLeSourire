@@ -1,1 +1,24 @@
-<p>project-front2 works!</p>
+<app-header></app-header>
+<div class="return">
+    <fa-icon [icon]="arrowLeft" routerLink="/developpeur-web"></fa-icon>
+</div>
+<div class="container">
+    <div class="all-card" >
+        <div >
+        <div class="card" *ngFor="let ressource of ressources">
+                <h1 class="title" id="title">{{ressource.title}}</h1>
+                <p class="content" id="content">{{ressource.content}}</p>
+                <img [src]="ressource.image" *ngIf="ressource.image !== null">
+                <div class="date">
+                    <p>Publier par : {{ressource.user_ressource.firstname}} {{ressource.user_ressource.lastname}}</p>
+                    <p>Le {{ressource.createdAt | date:'dd/MM/yyyy'}} à {{ressource.createdAt | date:'HH:mm'}}</p>
+                    <div class="button" *ngIf="connectUserId === ressource.userId">
+                        <button [routerLink]="['/modify-dev-web-ressource',ressource.project,ressource.id]">modifier</button>
+                        <app-dev-web-delete [ressourceId]="ressource.id"></app-dev-web-delete>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

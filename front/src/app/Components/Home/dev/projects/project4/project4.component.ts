@@ -15,6 +15,7 @@ export class Project4Component implements OnInit {
   ressourcesSub: Subscription;
   ressources: Ressources[];
   errorMsg
+  public connectUserId = JSON.parse(sessionStorage.getItem('session')).userId;
 
 
   constructor(
@@ -24,7 +25,7 @@ export class Project4Component implements OnInit {
   ngOnInit(): void {
     this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
       (ressources) => {
-        this.ressources = ressources;
+        this.ressources = ressources.filter(ressources => ressources.project === 'projet4');
         console.log(this.ressources);
         
       },
