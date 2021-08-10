@@ -103,4 +103,28 @@ module.exports = {
             res.status(400).json({error})
         }
     },
+
+    getAllUser: function(req,res){
+        let headerAuth = req.headers["authorization"];
+        let userId = jwtUtils.getUserId(headerAuth);
+        let fields  = req.query.fields;
+        let order   = req.query.order;
+
+        if(userId <= 0){
+            return res.status(400).json({error: 'veuillez vous authentifier'})
+        }
+        
+        models.User.findAll({
+            order: [(order != null) ? order.split(':') : ['id']],
+            attributes: (fields !== '*' && fields != null) ? fields.split(',') : null,
+        }).then(function (users){
+            if(users){
+                return res.status(200).json(users)
+            } else {
+                res.status(404).json({error : 'aucun utilisateur trouvé'})
+            }
+        }).catch(function (err){
+            res.status(500).json({message: err.message})
+        })
+    }
 }

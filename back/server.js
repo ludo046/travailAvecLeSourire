@@ -10,7 +10,7 @@ db.sequelize.sync();
 
 
 //instantiate server
-const server = express();
+let server = express();
 
 //parser config
 server.use(express.urlencoded({ extended:true }));
@@ -25,29 +25,27 @@ server.use('/', function(req,res,next){
     next();
 });
 
-let http = require('http');
-let httpServer = http.Server(server);
+let http = require('http').Server(server);
+//let httpServer = http.Server(server);
 
-let socketIO = require('socket.io');
-let io = socketIO(httpServer);
+let io = require('socket.io')(http);
+//let io = socketIO(httpServer);
 
 server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
-httpServer.listen(8080, function(){
+http.listen(8080, function(){
     console.log('Server en écoute :)');
 })
 
-io.on('connection', (socket) => {
-    socket.on('join',(data) => {
-        socket.join(data.room);
-        socket.broadcast.to(data.room).emit('user joined')
-    });
-    socket.on('message', (data) => {
-        io.in(data.room).emit('new message', {user:data.user, message: data.message});
-    });
-    socket.on('disconnect', (data) => {
-        console.log('user disconnect');
-    });
-});
+io.on('connection', function(socket){
+    console.log('user connected');
+    socket.on('disconnect', function(){
+        console.log('user diconnected');
+    })
+    socket.on('chat message', function(msg){
+        console.log('message recu' + msg);
+    })
+})
+

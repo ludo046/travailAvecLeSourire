@@ -40,6 +40,7 @@ import { ProjectFront11Component } from './Components/Home/dev-front/projects/pr
 import { ProjectFront12Component } from './Components/Home/dev-front/projects/project-front12/project-front12.component';
 import { ProjectFront13Component } from './Components/Home/dev-front/projects/project-front13/project-front13.component';
 import { ProjectFront14Component } from './Components/Home/dev-front/projects/project-front14/project-front14.component';
+import { ChatComponent } from './Components/Home/chat/chat/chat.component';
 
 
 export const ROUTES : Routes = [
@@ -58,6 +59,7 @@ export const ROUTES : Routes = [
   {path : 'dev-front-p1', component: ProjectFront1Component},
   {path : 'modify-dev-web-ressource/:project/:ressourceId', component: ModifyDevWebComponent},
   {path : 'modify-dev-front-ressource/:ressourceId', component: ModifyDevFrontComponent},
+  {path : 'chat', component: ChatComponent},
   {path : '', component: RegisterComponent}
 ]
 
@@ -94,7 +96,8 @@ export const ROUTES : Routes = [
     ProjectFront11Component,
     ProjectFront12Component,
     ProjectFront13Component,
-    ProjectFront14Component
+    ProjectFront14Component,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
