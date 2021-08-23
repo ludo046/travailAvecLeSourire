@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="container-fluid">
 
   <div class="row">
@@ -5,10 +7,10 @@
     <div class="col-md-4">
 
       <div class="user-list-card">
-        <div class="user-card">
+        <div class="user-card" *ngFor="let user of users">
 
-          <img class="avatar"/>
-          <p class="username">xgcxfxgxgxg</p>
+          <img [src]="user.picture" alt="" class="avatar">
+          <p class="username">{{user.firstname}} {{user.lastname}}</p>
 
         </div>
       </div>
@@ -17,33 +19,36 @@
     <div class="col-md-8">
 
       <div class="chat-container">
-        <ng-container>
+        <ng-container >
           <div class="chat-header">
 
             <img />
-            <p class="username">vvvvvvv</p>
+            <p class="username">qdfsdcs</p>
 
           </div>
 
           <div class="chat-body">
-            <div>
-              <p class="message-container">vvvvvv</p>
+            <cdk-virtual-scroll-viewport itemSize = "0" class="viewport">
+            <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'">
+              <p class="message-container" >{{msg.message}}</p>
+            </div> 
+            <div *ngFor="let message of chatMessage" [ngClass]="currentUser === message.msg.userId && 'same-user'">
+              <p class="message-container">{{message.msg.message}}</p>
             </div>
+          </cdk-virtual-scroll-viewport>
           </div>
 
           <div class="chat-footer">
 
             <div class="row">
               <div class="col-md-10">
-                <div class="form-group mb-0">
-                  <input type="text"
-                         placeholder="Type a message"
-                         class="form-control"/>
+                <div class="form-group mb-0" [formGroup]="messageForm">
+                  <input type="text" placeholder="Type a message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
                 </div>
               </div>
 
               <div class="col-md-2 text-center align-self-center">
-                <button class="btn btn-primary btn-sm px-3">Send</button>
+                <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()">Send</button>
               </div>
             </div>
 

@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="profile">
+        <img [src]="User.picture">
+        <p>nom : {{User.firstname}} {{User.lastname}}</p>
+        <p>email : {{User.email}}</p>
+        <p>age : {{User.age}} ans</p>
+
+    </div>
+    <div class="button">
+        <button routerLink="/modify-profile" >modifier</button>
+        <button>supprimer</button>
+    </div>
+</div>

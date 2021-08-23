@@ -1,0 +1,21 @@
+<app-header></app-header>
+<!-- <div class="return">
+    <fa-icon [icon]="arrowLeft" routerLink="/developpeur-web"></fa-icon>
+</div> -->
+<div class="container"> 
+    <form [formGroup]="updateUserForm">
+        <label for="lastname">nom</label>
+        <input type="text" name="lastname" formControlName="lastname">
+        <label for="firstname">prénom</label>
+        <input type="text" name="firstname" formControlName="firstname">
+        <label for="email">email</label>
+        <input type="text" name="email" formControlName="email">
+        <label for="age">age</label>
+        <input type="number" name="age" formControlName="age">
+        <label for="password">mot de passe</label>
+        <input type="text" name="password" formControlName="password">
+        <label for="file" class="label-file">Image de profil</label>
+        <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="picture" (change)="onFileAdded($event)">  
+        <button (click)="updateUser()">Valider</button>
+    </form>
+</div>

@@ -5,7 +5,6 @@ const fs = require("fs");
 const { invalid, func } = require("joi");
 const postRessourceSchema = require("../utils/joi/postRessourceSchema");
 const updateRessourceSchema = require('../utils/joi/updateSchema')
-const user = require("../models/user");
 
 const CONTENT_LIMIT = 5000;
 

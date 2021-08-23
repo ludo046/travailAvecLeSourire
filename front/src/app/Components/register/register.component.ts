@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       lastname: this.formBuilder.control('',[Validators.required, Validators.minLength(2)]),
       age: this.formBuilder.control('18',[Validators.required,Validators.min(18)]),
       email: this.formBuilder.control('',[Validators.required, Validators.minLength(2)]),
-      password: this.formBuilder.control('',[Validators.required, Validators.minLength(2)])
+      password: this.formBuilder.control('',[Validators.required, Validators.minLength(8)])
     })
   }
   register():void{

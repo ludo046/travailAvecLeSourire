@@ -1,0 +1,105 @@
+$background-color : #161623;
+$font-primary-color : white;
+$font : "montserrat", serif, sans-serif;
+
+::ng-deep *{
+    margin: 0;
+    padding: 0;
+    font-family: $font; 
+}
+fa-icon{
+    position: absolute;
+    z-index: 1;
+    font-size: 1.2rem;
+    top: 8px;
+    left: 10px;
+    color: $font-primary-color;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: $background-color;
+    z-index: -1;
+    flex-direction: column;
+    color: white;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#f00, #f0f);
+        clip-path: circle(30% at right 70%);
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#2196f3, #e91e63);
+        clip-path: circle(20% at 10% 10%);
+    }
+    .profile{
+        height: 300px;
+        width: 350px;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        margin-bottom: 30px;
+        img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+    }
+    .button{
+        height: 30px;
+        width: 350px;
+        z-index: 1;
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        button{
+            color: white;
+            height: 30px;
+            width: 120px;
+            z-index: 1;
+            line-height: 0px;
+            text-align: center;
+            box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 10px;
+        }
+    }
+    
+}

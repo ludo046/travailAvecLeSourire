@@ -41,6 +41,10 @@ import { ProjectFront12Component } from './Components/Home/dev-front/projects/pr
 import { ProjectFront13Component } from './Components/Home/dev-front/projects/project-front13/project-front13.component';
 import { ProjectFront14Component } from './Components/Home/dev-front/projects/project-front14/project-front14.component';
 import { ChatComponent } from './Components/Home/chat/chat/chat.component';
+import { ChatService } from './Services/chat/chat.service';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ViewProfileComponent } from './Components/Home/profile/view-profile/view-profile.component';
+import { ModifyProfileComponent } from './Components/Home/profile/modify-profile/modify-profile.component';
 
 
 export const ROUTES : Routes = [
@@ -60,6 +64,8 @@ export const ROUTES : Routes = [
   {path : 'modify-dev-web-ressource/:project/:ressourceId', component: ModifyDevWebComponent},
   {path : 'modify-dev-front-ressource/:ressourceId', component: ModifyDevFrontComponent},
   {path : 'chat', component: ChatComponent},
+  {path : 'profile', component: ViewProfileComponent},
+  {path : 'modify-profile', component: ModifyProfileComponent},
   {path : '', component: RegisterComponent}
 ]
 
@@ -97,7 +103,9 @@ export const ROUTES : Routes = [
     ProjectFront12Component,
     ProjectFront13Component,
     ProjectFront14Component,
-    ChatComponent
+    ChatComponent,
+    ViewProfileComponent,
+    ModifyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -107,9 +115,10 @@ export const ROUTES : Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ScrollingModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, HttpClient],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, HttpClient, ChatService, ChatComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

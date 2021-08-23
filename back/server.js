@@ -39,13 +39,16 @@ http.listen(8080, function(){
     console.log('Server en écoute :)');
 })
 
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
     console.log('user connected');
-    socket.on('disconnect', function(){
+    socket.on('my message', (msg) => {
+        io.emit('my broadcast', ({msg}))
+    })
+    socket.on('disconnect', () => {
         console.log('user diconnected');
     })
-    socket.on('chat message', function(msg){
-        console.log('message recu' + msg);
-    })
+    // socket.on('my message',(msg) => {
+    //     console.log('message: ' + msg);
+    // })
 })
 

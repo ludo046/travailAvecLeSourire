@@ -91,6 +91,7 @@ $font : "montserrat", serif, sans-serif;
                 border-top: 1px solid rgba(255, 255, 255, 0.5);
                 border-left: 1px solid rgba(255, 255, 255, 0.5);
                 backdrop-filter: blur(5px);
+                margin-bottom: 30px;
                 .avatar{
                     height: 30px;
                     width: 30px;
@@ -107,10 +108,13 @@ $font : "montserrat", serif, sans-serif;
             .chat-body{
                 height: calc(100vh - 125px);
                 overflow-y: auto;
+                .viewport{
+                    height: 100%;
+                }
                 .message-container{
                     box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
                     border-radius: 15px;
-                    background: rgba(255, 255, 255, 0.1);
+                    background: rgba(84, 146, 226, 0.233);
                     overflow: hidden;
                     border-top: 1px solid rgba(255, 255, 255, 0.5);
                     border-left: 1px solid rgba(255, 255, 255, 0.5);
@@ -124,7 +128,7 @@ $font : "montserrat", serif, sans-serif;
                     display: flex;
                     justify-content: flex-end;
                     .message-container{
-                        background: rgba(48, 125, 214, 0.1);
+                        background: rgba(85, 197, 57, 0.253);
                     }
                 }
             }

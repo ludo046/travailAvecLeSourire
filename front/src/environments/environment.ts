@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   userUrl: 'http://localhost:8080/api/users/',
-  ressourceUrl: 'http://localhost:8080/api/ressources/'
+  ressourceUrl: 'http://localhost:8080/api/ressources/',
+  chatUrl: 'http://localhost:8080/api/chat'
 };
 
 /*

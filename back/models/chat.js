@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       message: {
         allowNull: false,
-        type: Sequelize.STRING(5000)
+        type: Sequelize.STRING(1000)
       },
       image: {
         allowNull: true,
@@ -65,5 +65,5 @@ module.exports = (sequelize, Sequelize) => {
       ],
     }
   );
-  return Ressources;
+  return Chat;
 }
