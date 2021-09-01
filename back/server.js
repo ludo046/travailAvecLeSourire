@@ -44,6 +44,9 @@ io.on('connection', (socket) => {
     socket.on('my message', (msg) => {
         io.emit('my broadcast', ({msg}))
     })
+    socket.on('room message', (msg) => {
+        io.emit('message room', ({msg}))
+    })
     socket.on('disconnect', () => {
         console.log('user diconnected');
     })

@@ -45,6 +45,7 @@ import { ChatService } from './Services/chat/chat.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ViewProfileComponent } from './Components/Home/profile/view-profile/view-profile.component';
 import { ModifyProfileComponent } from './Components/Home/profile/modify-profile/modify-profile.component';
+import { RoomComponent } from './Components/Home/chat/room/room.component';
 
 
 export const ROUTES : Routes = [
@@ -66,6 +67,7 @@ export const ROUTES : Routes = [
   {path : 'chat', component: ChatComponent},
   {path : 'profile', component: ViewProfileComponent},
   {path : 'modify-profile', component: ModifyProfileComponent},
+  {path : 'chat/room/:contactId/:currentUser', component: RoomComponent},
   {path : '', component: RegisterComponent}
 ]
 
@@ -105,7 +107,8 @@ export const ROUTES : Routes = [
     ProjectFront14Component,
     ChatComponent,
     ViewProfileComponent,
-    ModifyProfileComponent
+    ModifyProfileComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

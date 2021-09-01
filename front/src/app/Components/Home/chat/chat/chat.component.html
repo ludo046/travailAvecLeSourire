@@ -7,11 +7,13 @@
     <div class="col-md-4">
 
       <div class="user-list-card">
-        <div class="user-card" *ngFor="let user of users">
-
-          <img [src]="user.picture" alt="" class="avatar">
-          <p class="username">{{user.firstname}} {{user.lastname}}</p>
-
+        <div class="user-card" [routerLink]="['/chat/room']">
+          <img src="" alt="">
+          <p class="username">travailAvecLeSourire</p>            
+      </div>
+        <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]">
+            <img [src]="user.picture" alt="" class="avatar">
+            <p class="username">{{user.firstname}} {{user.lastname}}</p>            
         </div>
       </div>
 

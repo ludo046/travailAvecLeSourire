@@ -6,6 +6,8 @@ const sendMessageSchema = Joi.object({
             .allow(null,'')
             .max(1200),
 
+            contactId: Joi.string(),
+
             roomId: Joi.string(),
 
             image: Joi.any(),

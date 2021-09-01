@@ -17,22 +17,7 @@ export class ChatService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // setupSocketConnection(){
-  //   this.socket = io('http://localhost:8080', {transports:['websocket']})
-  //   this.socket.on('my broadcast', (message: string) => {
-  //     this.chatMessage.push(message)
-  //     console.log(this.chatMessage);
-  //   })
-  // }
-
-  // disconnect(){
-  //   if(this.socket){
-  //     this.socket.disconnect();
-  //   }
-  // }
-
   sendMessage(message: string,attachment:File):Observable<{}>{
-    //this.socket.emit('my message', (message));
 
     const formData = new FormData();
     formData.append('message', message);
@@ -51,4 +36,17 @@ export class ChatService {
       }
     )
   }
+
+  sendRoomMessage(message: string, attachment:File, contactId: string, roomId: string):Observable<{}>{
+    //this.socket.emit('my message', (message));
+
+    const formData = new FormData();
+    formData.append('message', message);
+    formData.append('image', attachment);
+    formData.append('contactId', contactId)
+    formData.append('roomId', roomId)
+
+    return this.httpClient.post(`${this.chatUrl}/room`,formData);
+  }
+
 }

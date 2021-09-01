@@ -110,15 +110,29 @@ $font : "montserrat", serif, sans-serif;
                 }
             }
             .chat-body{
-                height: calc(100vh - 125px);
+                height: calc(100vh - 245px);
                 overflow-y: auto;
                 .viewport{
                     height: 100%;
                 }
+                .avatar-message{
+                    height: 30px;
+                    width: 30px;
+                    object-fit: cover;
+                    margin-right: 10px;
+                    border-radius: 50%;
+                }
+                .message{
+                    display: flex;
+                }
+                .name-message{
+                    margin: 0 0 5px 45px;
+                    font-size: 12px;
+                }
                 .message-container{
                     box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
                     border-radius: 15px;
-                    background: rgba(84, 146, 226, 0.233);
+                    background: rgb(75, 127, 196);
                     overflow: hidden;
                     border-top: 1px solid rgba(255, 255, 255, 0.5);
                     border-left: 1px solid rgba(255, 255, 255, 0.5);
@@ -132,7 +146,7 @@ $font : "montserrat", serif, sans-serif;
                     display: flex;
                     justify-content: flex-end;
                     .message-container{
-                        background: rgba(85, 197, 57, 0.253);
+                        background: rgb(50, 168, 39);
                     }
                 }
             }
@@ -142,7 +156,19 @@ $font : "montserrat", serif, sans-serif;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 10px 20px;
+            //padding: 10px 20px;
+            box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+            border-radius: 0 0 15px 15px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 0 10px;
             .form-control{
                 box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
                 border-radius: 15px;
@@ -152,6 +178,23 @@ $font : "montserrat", serif, sans-serif;
                 border-left: 1px solid rgba(255, 255, 255, 0.5);
                 backdrop-filter: blur(5px);
                 color: white;
+                width: 180px;
+                padding: 5px;
+                &::placeholder{
+                    color: white;
+                }
+            }
+            button{
+                box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                overflow: hidden;
+                border-top: 1px solid rgba(255, 255, 255, 0.5);
+                border-left: 1px solid rgba(255, 255, 255, 0.5);
+                backdrop-filter: blur(5px);
+                color: white;
+                margin-left: 20px;
+                padding: 5px;
             }
         }
     }

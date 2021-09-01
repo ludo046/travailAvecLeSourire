@@ -27,6 +27,7 @@ exports.router = (function(){
 
     apiRouter.route('/chat/sendMessage').post(multer, chatCtrl.sendMessage);
     apiRouter.route('/chat').get(chatCtrl.listMessage);
+    apiRouter.route('/chat/room').post(multer, chatCtrl.sendRoomMessage);
 
     return apiRouter
 })();

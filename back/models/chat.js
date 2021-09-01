@@ -18,6 +18,10 @@ module.exports = (sequelize, Sequelize) => {
           key: "id"
         }
       },
+      contactId: {
+        allowNull: true,
+        type : Sequelize.INTEGER
+      },
       message: {
         allowNull: false,
         type: Sequelize.STRING(1000)
@@ -27,6 +31,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(255)
       },
       movie: {
+        allowNull: true,
+        type: Sequelize.STRING(255)
+      },
+      roomId:{
         allowNull: true,
         type: Sequelize.STRING(255)
       },

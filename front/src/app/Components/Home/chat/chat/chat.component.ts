@@ -19,7 +19,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   users: Users[];
   errorMsg
   message: string;
-  //messages: any[] = [];
   currentUser = JSON.parse(sessionStorage.getItem('session')).userId;
   public messageForm: FormGroup;
   public file: File;
@@ -72,7 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.messageSub = this.chatService.message$.subscribe(
       (messages) => {
-        this.messages = messages
+        this.messages = messages.filter(messages => messages.contactId === null);
       },
       (error) => {
         console.log(error);
@@ -98,7 +97,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     const content = this.messageForm.get('message').value;
     const attachment = this.file;
     this.chatService.sendMessage(content,attachment).subscribe(() => {
-      //this.getMessage()
       this.messageText = '';
     });
     this.socket.emit('my message', (socket));
@@ -127,6 +125,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       console.log(this.chatMessage);
     })
   }
+
+  // joinRoom(){
+  //   this.chatService.joinRoom(this.currentUser, contactId)
+  // }
 
   disconnect(){
     if(this.socket){

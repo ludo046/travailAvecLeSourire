@@ -1,0 +1,67 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-md-4">
+
+      <div class="user-list-card">
+        <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]" (click)="chatReload()">
+            <img [src]="user.picture" alt="" class="avatar">
+            <p class="username" >{{user.firstname}} {{user.lastname}}</p>            
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+
+      <div class="chat-container">
+        <ng-container >
+          <div class="chat-header" *ngFor="let user of singleUser">
+
+            <img [src]="user.picture" alt="" class="avatar">
+            <p class="username">{{user.firstname}} {{user.lastname}}</p>
+
+          </div>
+
+          <div class="chat-body">
+            <cdk-virtual-scroll-viewport itemSize = "0" class="viewport">
+            <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'" >
+              <p *ngIf="currentUser !== msg.userId" class="name-message">{{msg.user_chat.firstName}} {{msg.user_chat.lastName}}</p>
+              <div class="message">
+                <img [src]="msg.user_chat.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
+                <p class="message-container">{{msg.message}}</p>
+              </div>
+
+            </div> 
+            <p *ngIf="roomMessages.length !== 0">nouveaux messages :</p>
+            <div *ngFor="let message of roomMessages" [ngClass]="currentUser === message.msg.userId && 'same-user'" class="message">
+              <p class="message-container">{{message.msg.message}}</p>
+            </div>
+          </cdk-virtual-scroll-viewport>
+          </div>
+
+          <div class="chat-footer">
+
+            <div class="row">
+              <div class="col-md-10">
+                <div class="form-group mb-0" [formGroup]="messageForm">
+                  <input type="text" placeholder="Ecrivez votre message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
+                </div>
+              </div>
+
+              <div class="col-md-2 text-center align-self-center">
+                <button class="btn btn-primary btn-sm px-3" (click)="sendRoomMessage()">Envoyer</button>
+              </div>
+            </div>
+
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
