@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faPaperPlane, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
 import { Subject, Subscription } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { MessageModel } from 'src/app/Models/chat.model';
@@ -28,6 +29,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   messagesSub: Subscription;
   socketMessage: [any];
   messageArray: Array<{message: string, currentUser: number}>;
+  faPaperPlane = faPaperPlane;
+  faPhotoVideo = faPhotoVideo;
+  fullPathname ='assets/images/smiley.jpg'
 
 
 

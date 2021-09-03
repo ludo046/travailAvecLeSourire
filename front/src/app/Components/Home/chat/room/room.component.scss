@@ -8,33 +8,50 @@ $font : "montserrat", serif, sans-serif;
     font-family: $font; 
 }
 
+@keyframes rotate{
+    0% {
+              transform: scale(1) rotateZ(0);
+    }
+    50% {
+              transform: scale(1.1) rotateZ(180deg);
+    }
+    100% {
+              transform: scale(1) rotateZ(360deg);
+    }
+  }
 .container-fluid{
-    padding: 50px 200px;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: $background-color;
+    position: relative;
+    overflow: hidden;
     &::before{
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 200px;
+        left: 100px;
         width: 100%;
         height: 100%;
         background: linear-gradient(#f00, #f0f);
-        clip-path: circle(30% at right 70%);
+        clip-path: circle(30% at 50% 50%);
+        animation: rotate 5s infinite ;
+        @media only screen and (min-width : 1224px) {
+            left: 400px;
+            clip-path: circle();
+            }
     }
     &::after{
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -200px;
+        left: -100px;
         width: 100%;
         height: 100%;
         background: linear-gradient(#2196f3, #e91e63);
-        clip-path: circle(20% at 10% 10%);
+        clip-path: circle(20% at 50% 50%);
+        animation: rotate 5s 1s infinite ;
     }
     .row{
         display: flex;
@@ -68,8 +85,9 @@ $font : "montserrat", serif, sans-serif;
             backdrop-filter: blur(5px);
             margin-bottom: 10px;
             align-items: center;
+            color: white;
             &.active{
-                background: #5353bb62;
+                background: #0505ebcc;
             }
             .avatar{
                 height: 50px;
@@ -102,6 +120,13 @@ $font : "montserrat", serif, sans-serif;
                     border-radius: 50px;
                     overflow: hidden;
                     margin: 0 15px 0 0;
+                }
+                .avatar-header{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50px;
+                    overflow: hidden;
+                    margin: 0 15px 0 20px;
                 }
                 .username{
                     display: flex;
@@ -146,8 +171,13 @@ $font : "montserrat", serif, sans-serif;
                     display: flex;
                     justify-content: flex-end;
                     .message-container{
-                        background: rgb(50, 168, 39);
+                        background: rgb(106, 40, 136);
                     }
+                }
+                .msg-img{
+                    width: 200px;
+                    border-radius: 5px;
+                    margin-top: 10px;
                 }
             }
         }
@@ -196,6 +226,7 @@ $font : "montserrat", serif, sans-serif;
                 margin-left: 20px;
                 padding: 5px;
             }
+
         }
     }
 }
@@ -211,4 +242,17 @@ $font : "montserrat", serif, sans-serif;
     backdrop-filter: blur(5px);
     color: white;
     margin-left: 20px;
+}
+.input-file{
+    display: none;
+}
+.label-file{
+    background: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    border-radius: 15px;
+    box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    outline: none;
 }

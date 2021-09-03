@@ -3,6 +3,7 @@ const express = require('express');
 const apiRouter = require('./apiRouter').router;
 const path = require('path');
 const helmet = require('helmet')
+const fs = require('fs')
 require('dotenv').config();
 const db = require("./models");
 db.sequelize.sync();
@@ -46,6 +47,12 @@ io.on('connection', (socket) => {
     })
     socket.on('room message', (msg) => {
         io.emit('message room', ({msg}))
+    })
+    socket.on('image', (image, buffer) => {
+        fs.readFile(__dirname + '/images/image.jpg', (err, buf) => {
+            socket.emit('image', {image: true, buffer: buf});
+            console.log('image file is initialized');
+        })
     })
     socket.on('disconnect', () => {
         console.log('user diconnected');

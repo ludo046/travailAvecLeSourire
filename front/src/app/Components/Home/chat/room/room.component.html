@@ -7,6 +7,10 @@
     <div class="col-md-4">
 
       <div class="user-list-card">
+        <div class="user-card" [routerLink]="['/chat/']">
+          <img src="{{fullPathname}}" alt="" class="avatar">
+          <p class="username">travailAvecLeSourire</p>            
+      </div>
         <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]" (click)="chatReload()">
             <img [src]="user.picture" alt="" class="avatar">
             <p class="username" >{{user.firstname}} {{user.lastname}}</p>            
@@ -19,10 +23,8 @@
       <div class="chat-container">
         <ng-container >
           <div class="chat-header" *ngFor="let user of singleUser">
-
-            <img [src]="user.picture" alt="" class="avatar">
+            <img [src]="user.picture" alt="" class="avatar-header">
             <p class="username">{{user.firstname}} {{user.lastname}}</p>
-
           </div>
 
           <div class="chat-body">
@@ -31,13 +33,17 @@
               <p *ngIf="currentUser !== msg.userId" class="name-message">{{msg.user_chat.firstName}} {{msg.user_chat.lastName}}</p>
               <div class="message">
                 <img [src]="msg.user_chat.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
-                <p class="message-container">{{msg.message}}</p>
+                <div class="message-container">
+                  <p >{{msg.message}}</p>
+                  <img [src]="msg.image" alt="" class="msg-img" *ngIf="msg.image">
+                </div>
               </div>
 
             </div> 
             <p *ngIf="roomMessages.length !== 0">nouveaux messages :</p>
             <div *ngFor="let message of roomMessages" [ngClass]="currentUser === message.msg.userId && 'same-user'" class="message">
               <p class="message-container">{{message.msg.message}}</p>
+              <img src="" alt="">
             </div>
           </cdk-virtual-scroll-viewport>
           </div>
@@ -52,7 +58,9 @@
               </div>
 
               <div class="col-md-2 text-center align-self-center">
-                <button class="btn btn-primary btn-sm px-3" (click)="sendRoomMessage()">Envoyer</button>
+                  <label for="file" class="label-file"><fa-icon [icon]="faPhotoVideo"></fa-icon></label>
+                  <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file" (change)="onFileAdded($event)">
+                  <button class="btn btn-primary btn-sm px-3" (click)="sendRoomMessage()" ><fa-icon [icon]="faPaperPlane"></fa-icon></button>           
               </div>
             </div>
 

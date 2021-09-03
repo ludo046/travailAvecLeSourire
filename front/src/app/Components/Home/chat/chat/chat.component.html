@@ -7,8 +7,8 @@
     <div class="col-md-4">
 
       <div class="user-list-card">
-        <div class="user-card" [routerLink]="['/chat/room']">
-          <img src="" alt="">
+        <div class="user-card" [routerLink]="['/chat/']">
+          <img src="{{fullPathname}}" alt="" class="avatar">
           <p class="username">travailAvecLeSourire</p>            
       </div>
         <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]">
@@ -24,15 +24,26 @@
         <ng-container >
           <div class="chat-header">
 
-            <img />
-            <p class="username">qdfsdcs</p>
+            <img src="{{fullPathname}}" alt="" class="avatar-header">
+            <p class="username">travailAvecLeSourire</p>
 
           </div>
 
           <div class="chat-body">
             <cdk-virtual-scroll-viewport itemSize = "0" class="viewport">
-            <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'">
-              <p class="message-container" >{{msg.message}}</p>
+            <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'" >
+              <div>
+                <p class="name-message" *ngIf="currentUser !== msg.userId">{{msg.user_chat.firstName}} {{msg.user_chat.lastName}}</p>
+                <div class="message">
+                  <img [src]="msg.user_chat.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
+                  <div class="message-container">
+                    <p >{{msg.message}}</p>
+                    <img [src]="msg.image" alt="" class="msg-img" *ngIf="msg.image">                 
+                  </div>
+                </div>
+
+              </div>
+
             </div> 
             <div *ngFor="let message of chatMessage" [ngClass]="currentUser === message.msg.userId && 'same-user'">
               <p class="message-container">{{message.msg.message}}</p>
@@ -45,12 +56,14 @@
             <div class="row">
               <div class="col-md-10">
                 <div class="form-group mb-0" [formGroup]="messageForm">
-                  <input type="text" placeholder="Type a message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
+                  <input type="text" placeholder="Ecrivez votre message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
                 </div>
               </div>
 
               <div class="col-md-2 text-center align-self-center">
-                <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()">Send</button>
+                <label for="file" class="label-file"><fa-icon [icon]="faPhotoVideo"></fa-icon></label>
+                <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file" (change)="onFileAdded($event)">
+                <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()" ><fa-icon [icon]="faPaperPlane"></fa-icon></button>  
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faPaperPlane, faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
 import { Subject, Subscription } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { MessageModel } from 'src/app/Models/chat.model';
@@ -44,7 +45,11 @@ export class RoomComponent implements OnInit {
   contact : number;
   userId: string;
   roomMessages = []
-  singleUser = []
+  singleUser = [];
+  faPaperPlane = faPaperPlane;
+  faPhotoVideo = faPhotoVideo;
+  fullPathname ='assets/images/smiley.jpg'
+  //result: []
 
 
   ngOnInit(): void {
@@ -118,10 +123,11 @@ export class RoomComponent implements OnInit {
     const roomId = this.userId + '-' + this.contactId
     const content = this.messageForm.get('message').value;
     const attachment = this.file;
+
     const socket = {
       message : this.messageForm.get('message').value,
       userId: this.currentUser,
-      roomId: roomId
+      roomId: roomId,
     }
     this.chatService.sendRoomMessage(content,attachment,this.contactId, roomId).subscribe(() => {
       //this.getMessage()
@@ -129,6 +135,7 @@ export class RoomComponent implements OnInit {
     });
 
     this.socket.emit('room message', (socket));
+    this.socket.emit('image', (attachment))
   }
 
   setupSocketConnection(){
@@ -147,6 +154,8 @@ export class RoomComponent implements OnInit {
       console.log(this.roomMessages);
       
     })
+
+
   }
 
   chatReload(){

@@ -15,34 +15,50 @@ fa-icon{
     left: 10px;
     color: $font-primary-color;
 }
+@keyframes rotate{
+    0% {
+              transform: scale(1) rotateZ(0);
+    }
+    50% {
+              transform: scale(1.1) rotateZ(180deg);
+    }
+    100% {
+              transform: scale(1) rotateZ(360deg);
+    }
+  }
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: $background-color;
-    z-index: -1;
-    flex-direction: column;
-    color: white;
+    position: relative;
+    overflow: hidden;
     &::before{
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 200px;
+        left: 100px;
         width: 100%;
         height: 100%;
         background: linear-gradient(#f00, #f0f);
-        clip-path: circle(30% at right 70%);
+        clip-path: circle(30% at 50% 50%);
+        animation: rotate 5s infinite ;
+        @media only screen and (min-width : 1224px) {
+            left: 400px;
+            clip-path: circle();
+            }
     }
     &::after{
         content: '';
         position: absolute;
-        top: 0px;
-        left: 0;
+        top: -200px;
+        left: -100px;
         width: 100%;
         height: 100%;
         background: linear-gradient(#2196f3, #e91e63);
-        clip-path: circle(20% at 10% 10%);
+        clip-path: circle(20% at 50% 50%);
+        animation: rotate 5s 1s infinite ;
     }
     form{
         z-index: 1;
@@ -62,6 +78,7 @@ fa-icon{
         width: 300px;
         height: 400px;
         padding: 10px;
+        color: white;
         input{
             margin-bottom: 10px;
             height: 30px;
