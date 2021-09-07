@@ -46,6 +46,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ViewProfileComponent } from './Components/Home/profile/view-profile/view-profile.component';
 import { ModifyProfileComponent } from './Components/Home/profile/modify-profile/modify-profile.component';
 import { RoomComponent } from './Components/Home/chat/room/room.component';
+import { VisioComponent } from './Components/Home/visio/visio/visio.component';
 
 
 export const ROUTES : Routes = [
@@ -68,6 +69,7 @@ export const ROUTES : Routes = [
   {path : 'profile', component: ViewProfileComponent},
   {path : 'modify-profile', component: ModifyProfileComponent},
   {path : 'chat/room/:contactId/:currentUser', component: RoomComponent},
+  {path : 'visio', component: VisioComponent},
   {path : '', component: RegisterComponent}
 ]
 
@@ -108,7 +110,8 @@ export const ROUTES : Routes = [
     ChatComponent,
     ViewProfileComponent,
     ModifyProfileComponent,
-    RoomComponent
+    RoomComponent,
+    VisioComponent
   ],
   imports: [
     BrowserModule,

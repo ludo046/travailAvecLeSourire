@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./back
+      dockerfile: Dockerfile-dev
+    ports:
+      - "8080:8080"
+    container_name: back
+    volumes:
+       - ./back:/usr/src/app/back
+       - /usr/src/app/back/node_modules
+  angular-ui:
+    build:
+      context: ./front
+      dockerfile: Dockerfile-dev
+    ports:
+      - "4200:4200"
+    container_name: front
+    volumes:
+       - ./front:/usr/src/app/front
+       - /usr/src/app/front/node_modules
