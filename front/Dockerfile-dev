@@ -1,6 +1,6 @@
-FROM nginx:alpine
-WORKDIR /usr/src/app/front
+FROM node:8
+WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm install -g @angular/cli && @angular-devkit/build-angular && npm install
+RUN npm install -g @angular/cli 
 EXPOSE 4200
 CMD ["npm", "start"]
