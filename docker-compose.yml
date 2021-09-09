@@ -1,6 +1,7 @@
+
 version: '3'
 services:
-  nodejs-server:
+  back:
     build:
       context: ./back
       dockerfile: Dockerfile-dev
@@ -10,7 +11,7 @@ services:
     volumes:
        - ./back:/usr/src/app/back
        - /usr/src/app/back/node_modules
-  angular-ui:
+  front:
     build:
       context: ./front
       dockerfile: Dockerfile-dev
