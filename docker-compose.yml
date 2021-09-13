@@ -19,5 +19,5 @@ services:
       - "4200:4200"
     container_name: front
     volumes:
-       - ./front:/usr/dist
+       - ./front:/usr/dist/travail
        - /usr/src/app/front/node_modules
