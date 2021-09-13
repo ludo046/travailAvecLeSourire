@@ -11,4 +11,4 @@ COPY . .
 
 EXPOSE 4200
 
-CMD npm serve --host 185.216.25.196 --port 4200
+CMD ng serve --host 185.216.25.196 --port 4200
