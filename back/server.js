@@ -36,7 +36,7 @@ server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
-http.listen(8080, function(){
+http.listen(3306, function(){
     console.log('Server en écoute :)');
 })
 
