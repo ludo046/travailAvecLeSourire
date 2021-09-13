@@ -1,13 +1,13 @@
-FROM node:14.15.0
+FROM node:14.15.0-alpine
 
 WORKDIR /usr/src/app/back
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --quiet
 
 COPY . .
 
-EXPOSE 8080
+#EXPOSE 8080
 
-CMD [ "node", "server.js" ]
+#CMD [ "node", "server.js" ]
