@@ -2,6 +2,7 @@
 
 module.exports = {
   dialect: "mysql",
+  host: '185.216.25.196',
   pool: {
     max: 5,
     min: 0,
