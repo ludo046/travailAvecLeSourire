@@ -6,8 +6,8 @@ const helmet = require('helmet')
 const fs = require('fs')
 require('dotenv').config();
 const db = require("./models");
-//db.sequelize.sync();
-db.sequelize.sync({force: true});
+db.sequelize.sync();
+//db.sequelize.sync({force: true});
 
 
 //instantiate server
@@ -36,7 +36,7 @@ server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
-http.listen(3306, function(){
+http.listen(8080, function(){
     console.log('Server en écoute :)');
 })
 
