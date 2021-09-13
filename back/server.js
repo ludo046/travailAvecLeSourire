@@ -8,6 +8,7 @@ require('dotenv').config();
 const db = require("./models");
 db.sequelize.sync();
 //db.sequelize.sync({force: true});
+require('dotenv').config();
 
 
 //instantiate server
@@ -36,7 +37,7 @@ server.use('/api/', apiRouter);
 server.use('/images', express.static(path.join(__dirname, 'images')));
 
 //launch server
-http.listen(8080, function(){
+http.listen(8080, process.env.HOST, function(){
     console.log('Server en écoute :)');
 })
 
