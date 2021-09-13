@@ -1,7 +1,7 @@
 
 FROM node:14.15.0-alpine as build-step
 
-WORKDIR /front
+WORKDIR ./front
 
 COPY package.json ./
 
