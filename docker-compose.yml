@@ -6,7 +6,7 @@ services:
       context: ./back
       dockerfile: Dockerfile-dev
     ports:
-      - "8080:3306"
+      - "8080:8080"
     container_name: back
     volumes:
        - ./back:/usr/src/app/back

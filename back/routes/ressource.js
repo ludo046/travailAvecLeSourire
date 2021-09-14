@@ -75,7 +75,6 @@ module.exports = {
                 });
             },
             function (userFound, done) {
-              console.log(userFound.id);
               if (userFound) {
                 models.Ressource.create({
                   userId: userFound.id,
@@ -88,7 +87,9 @@ module.exports = {
                   isAdmin: false
                 }).then(function (newRessource) {
                   done(newRessource);
-                });
+                }).catch(function(err){
+                  return res.status(404).json({message: err.message });
+                })
               } else {
                 res.status(404).json({ error: "user not found" });
               }
@@ -389,6 +390,7 @@ module.exports = {
       res.status(400).json({message: error.message})
     }
   },
+
   getOneRessource: function(req, res){
     let headerAuth = req.headers["authorization"];
     let userId = jwtUtils.getUserId(headerAuth);

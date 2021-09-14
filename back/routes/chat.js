@@ -62,7 +62,9 @@ module.exports = {
                         movie: movie,
                       }).then(function (newMessage) {
                         done(newMessage);
-                      });
+                      }).catch(function(error){
+                        return res.status(404).json({message: error.message})
+                      })
                     } else {
                       res.status(404).json({ error: "user not found" });
                     }
@@ -184,7 +186,9 @@ module.exports = {
                       roomId: roomId
                     }).then(function (newMessage) {
                       done(newMessage);
-                    });
+                    }).catch(function(error){
+                      return res.status(404).json({message: error.message})
+                    })
                   } else {
                     res.status(404).json({ error: "user not found" });
                   }

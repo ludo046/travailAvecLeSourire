@@ -57,6 +57,9 @@ module.exports = {
                         return res.status(409).json({ 'error' : 'un compte utilisateur existe déjà avec cette adress mail' });
                     }
                 })
+                .catch(function(error){
+                    return res.status(500).json({error})
+                })
             } else {
                 throw error(invalid)
             }
@@ -135,7 +138,7 @@ module.exports = {
         const userId = jwtUtils.getUserId(headerAuth)
 
         if(userId <= 0 ){
-            returnres.status(400).json({'error': `vous n'êtes pas identifié`});
+            return res.status(400).json({'error': `vous n'êtes pas identifié`});
         }
 
         models.User.findOne({
