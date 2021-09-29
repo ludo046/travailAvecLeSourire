@@ -15,6 +15,7 @@ export class DevComponent implements OnInit {
   public file: File;
   public ressourceForm: FormGroup;
   public allRessources = new BehaviorSubject([]);
+  errorMsg: any;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -34,7 +35,6 @@ export class DevComponent implements OnInit {
   onFileAdded(event: Event) {
     //recuperation de la photo ou de la video ci il ya
     this.file = (event.target as HTMLInputElement).files[0];
-    console.log(this.file);
     
   }
 
@@ -47,6 +47,15 @@ export class DevComponent implements OnInit {
     
     
 
-    this.ressoursesService.postRessource(content,project,attachment,parcours,title).subscribe()
+    this.ressoursesService.postRessource(content,project,attachment,parcours,title).subscribe(
+      result => {
+        console.log(result);
+        this.errorMsg = result
+      },
+      error => {
+      this.errorMsg = error.error.message
+      console.log(this.errorMsg);
+      }
+    )
   }
 }

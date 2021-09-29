@@ -26,11 +26,9 @@ export class ProjectFront4Component implements OnInit {
     this.ressourcesSub = this.ressourceService.allRessourcesDevFront$.subscribe(
       (ressources) => {
         this.ressources = ressources.filter(ressources => ressources.project === 'projet1');
-        console.log(this.ressources);
         
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );

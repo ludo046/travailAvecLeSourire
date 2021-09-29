@@ -67,7 +67,6 @@ module.exports = {
                 where: { id: userId }
               })
                 .then(function (userFound) {
-                  console.log(userFound);
                   done(null, userFound);
                 })
                 .catch(function(error){
@@ -77,7 +76,7 @@ module.exports = {
             function (userFound, done) {
               if (userFound) {
                 models.Ressource.create({
-                  userId: userFound.id,
+                  UserId: userFound.id,
                   title: title,
                   content: content,
                   project: project,
@@ -107,7 +106,7 @@ module.exports = {
         throw error(invalid);
       }
     } catch (error) {
-      res.status(400).json({ error });
+      res.status(400).json({ message: error.message });
     }
   },
 
@@ -125,7 +124,7 @@ module.exports = {
         {
           model: models.User,
           attributes: ["firstname", "lastname"],
-          as: "user_ressource"
+          //as: "user_ressource"
         },
       ],
     })
@@ -137,7 +136,6 @@ module.exports = {
         }
       })
       .catch(function (err) {
-        console.log(err);
         res.status(500).json({ error: "invalid fields" });
       });
   },
@@ -150,13 +148,13 @@ module.exports = {
       order: [order != null ? order.split(":") : ["id", "DESC"]], 
       attributes: fields !== "*" && fields != null ? fields.split(",") : null,
       where:{
-        parcours: 'developpeur-frontend'
+        parcours: 'developpeur-front'
       },
       include: [
         {
           model: models.User,
           attributes: ["firstname", "lastname"],
-          as: "user_ressource"
+          //as: "user_ressource"
         },
       ],
     })
@@ -168,7 +166,6 @@ module.exports = {
         }
       })
       .catch(function (err) {
-        console.log(err);
         res.status(500).json({ error: "invalid fields" });
       });
   },
@@ -261,7 +258,7 @@ module.exports = {
       where:{
         userId: userId,
         id: ressourceId,
-        parcours: 'developpeur-frontend'
+        parcours: 'developpeur-front'
       }
     })
     .then(function(ressource){
@@ -277,8 +274,8 @@ module.exports = {
           .then(function(){
             res.status(201).json(({ok: "ressource supprimée"}))
           })
-          .catch(function (err){
-            res.status(400).json({ err });
+          .catch(function (error){
+            res.status(400).json({message : error.message});
           })
         });
       } else if(ressource.movie){
@@ -293,8 +290,8 @@ module.exports = {
           .then(function(){
             res.status(201).json(({ok: "ressource supprimée"}))
           })
-          .catch(function (err){
-            res.status(400).json({ err });
+          .catch(function (error){
+            res.status(400).json({message : error.message});
           })
         });
       } else {
@@ -307,13 +304,13 @@ module.exports = {
         .then(function(){
           res.status(201).json(({ok: "ressource supprimée"}))
         })
-        .catch(function (err){
-          res.status(400).json({ err });
+        .catch(function (error){
+          res.status(400).json({message : error.message});
         })
       }
     })
-    .catch(function(err){
-      res.status(400).json({ err });
+    .catch(function(error){
+      res.status(400).json({message : error.message});
     })
   },
 
@@ -395,8 +392,6 @@ module.exports = {
     let headerAuth = req.headers["authorization"];
     let userId = jwtUtils.getUserId(headerAuth);
     const ressourceId = req.params.ressourceId;
-    console.log(userId);
-    console.log(ressourceId);
 
 
     if(userId <= 0){

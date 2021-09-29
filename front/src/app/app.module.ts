@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -47,6 +47,11 @@ import { ViewProfileComponent } from './Components/Home/profile/view-profile/vie
 import { ModifyProfileComponent } from './Components/Home/profile/modify-profile/modify-profile.component';
 import { RoomComponent } from './Components/Home/chat/room/room.component';
 import { VisioComponent } from './Components/Home/visio/visio/visio.component';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
+import { MailComponent } from './Components/mail/mail.component';
+//import { PostRessourceComponent } from './Components/Home/post-ressource/post-ressource.component';
+import { DevWebComponent } from './Components/Home/postRessource/dev-web/dev-web.component';
+import { DeveloppeurFrontComponent } from './Components/Home/postRessource/developpeur-front/developpeur-front.component';
 
 
 export const ROUTES : Routes = [
@@ -70,7 +75,11 @@ export const ROUTES : Routes = [
   {path : 'modify-profile', component: ModifyProfileComponent},
   {path : 'chat/room/:contactId/:currentUser', component: RoomComponent},
   {path : 'visio', component: VisioComponent},
-  {path : '', component: RegisterComponent}
+  {path : 'welcome/:token', component: WelcomeComponent},
+  {path : 'mail', component: MailComponent},
+  {path : 'developpeur-front/postressource', component: DeveloppeurFrontComponent},
+  {path : 'developpeur-web/postressource', component: DevWebComponent},
+  {path : '', component: LoginComponent}
 ]
 
 @NgModule({
@@ -111,7 +120,12 @@ export const ROUTES : Routes = [
     ViewProfileComponent,
     ModifyProfileComponent,
     RoomComponent,
-    VisioComponent
+    VisioComponent,
+    WelcomeComponent,
+    MailComponent,
+    //PostRessourceComponent,
+    DevWebComponent,
+    DeveloppeurFrontComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +137,9 @@ export const ROUTES : Routes = [
     MatDialogModule,
     BrowserAnimationsModule,
     ScrollingModule,
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, HttpClient, ChatService, ChatComponent],
   bootstrap: [AppComponent]

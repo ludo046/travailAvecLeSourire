@@ -1,77 +1,33 @@
-"use strict";
-
-module.exports = (sequelize, Sequelize) => {
-  const Chat = sequelize.define(
-    "chat",
-    {
-      id:{
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
-      userId: {
-        allowNull: false,
-        type : Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id"
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Chat extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.Chat.belongsTo(models.User,{
+        foreignKey:{
+          allowNull: false
         }
-      },
-      contactId: {
-        allowNull: true,
-        type : Sequelize.INTEGER
-      },
-      message: {
-        allowNull: false,
-        type: Sequelize.STRING(1000)
-      },
-      image: {
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      movie: {
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      roomId:{
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-    },
-    {
-      sequelize,
-      tableName: "chat",
-      timestamps: false,
-      indexes: [
-        {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-        {
-          name: "ordreDate",
-          using: "BTREE",
-          fields: [{ name: "createdAt" }],
-        },
-        {
-          name: "fk_ressource_user_idx",
-          using: "BTREE",
-          fields: [{ name: "userId" }],
-        },
-      ],
+      })
     }
-  );
+  };
+  Chat.init({
+    UserId: DataTypes.INTEGER,
+    contactId: DataTypes.INTEGER,
+    message: DataTypes.STRING,
+    image: DataTypes.STRING,
+    movie: DataTypes.STRING,
+    roomId: DataTypes.STRING,
+  }, {
+    sequelize,
+    modelName: 'Chat',
+  });
   return Chat;
-}
+};

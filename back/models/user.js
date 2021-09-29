@@ -1,74 +1,35 @@
-"use strict";
-
-module.exports = (sequelize, Sequelize) => {
-  const Users = sequelize.define(
-    "users",
-    {
-      id:{
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true
-      },
-      firstname: {
-        allowNull: false,
-        type : Sequelize.STRING(100),
-      },
-      lastname: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
-      },
-      age: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING(255),
-        unique: "email_UNIQUE"
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING(255)
-      },
-      picture: {
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      isAdmin: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-    },
-    {
-      sequelize,
-      tableName: "users",
-      timestamps: false,
-      indexes: [
-        {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-        {
-          name: "email_UNIQUE",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "email" }],
-        },
-      ],
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.User.hasMany(models.Ressource, {
+        foreignKey: "userId"
+      });
+      models.User.hasMany(models.Chat, {
+        foreignKey:"userId"
+      });
     }
-  );
-  return Users;
-}
+  };
+  User.init({
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING,
+    age: DataTypes.INTEGER,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    picture: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

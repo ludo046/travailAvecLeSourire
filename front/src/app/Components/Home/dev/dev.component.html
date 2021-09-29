@@ -2,32 +2,13 @@
 <div class="return">
     <fa-icon [icon]="arrowLeft" routerLink="/home" class="icon"></fa-icon>
 </div>
-<div class="post" [formGroup]="ressourceForm">
-    <input type="text" class="form-control" formControlName="title" placeholder="titre"> 
-    <textarea name="" id="" cols="30" rows="10" placeholder="votre ressource" class="form-control" formControlName="content"></textarea>
-    <div class="select">
-        <select name="project" id="select-project" class="form-control" formControlName="project">
-            <option value=""> -- choisir le projet --</option>
-            <option value="projet1">projet 1</option>
-            <option value="projet2">projet 2</option>
-            <option value="projet3">projet 3</option>
-            <option value="projet4">projet 4</option>
-            <option value="projet5">projet 5</option>
-            <option value="projet6">projet 6</option>
-            <option value="projet7">projet 7</option>
-        </select>
-    </div>
 
-    <div class="button">
-        <div>
-            <label for="file" class="label-file">Image / Vidéo</label>
-            <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="onFileAdded($event)">           
-        </div>
-        <button (click)="postRessource()">Envoyer</button>
-    </div>
-</div>
 <div class="container">
     <div class="projects">
+        <div>
+            <button class="send" routerLink="/developpeur-web/postressource">Ajouter une ressource</button>
+        </div>
+        <div class="all-card">
         <div class="card">
             <div class="content">
                 <div class="back">
@@ -101,9 +82,10 @@
                 </div>
                 <div class="front">
                     <h3>Projet 7</h3>
-                    <button routerLink="/developpeur-web/projet7">Accès aux ressources</button>
+                    <button routerLink="/developpeur-web/p7">Accès aux ressources</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>

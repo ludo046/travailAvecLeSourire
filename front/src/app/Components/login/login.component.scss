@@ -91,6 +91,8 @@ $font : "montserrat", serif, sans-serif;
                 padding-left: 20px;
                 color: white;
                 outline: none;
+                touch-action: none;
+                font-size: 16px;
                 &::placeholder{
                     color: white;
                 }
@@ -99,6 +101,14 @@ $font : "montserrat", serif, sans-serif;
                 color: $font-primary-color;
                 margin-bottom: 20px;
             }
+            .error{
+                font-size: 14px;
+                border-radius: 15px;
+                border: 2px solid #161623;
+                padding: 5px;
+                text-align: center;
+                width: 90%;
+            }
             button{
                 margin-bottom: 20px;
                 height: 40px;
@@ -106,6 +116,10 @@ $font : "montserrat", serif, sans-serif;
                 border-radius: 50px;
                 border: none;
                 outline: none;
+                cursor: pointer;
+                &:hover{
+                    transform: scale(1.1);
+                }
             }
         }
     }

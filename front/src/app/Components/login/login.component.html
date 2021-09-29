@@ -1,11 +1,12 @@
 <div class="container">
     <div class="form-container">
         <h1>travailAvecLeSourire</h1>
-        <h2>S'inscrire</h2>
+        <h2>Se connecter</h2>
         <form [formGroup]="loginForm">
             <input type="mail" placeholder="monemail@email.com" class="form-control" id="email" formControlName="email">
             <input type="password" placeholder="mot de passe" class="form-control" id="password" formControlName="password">
             <p>8 caractères dont 1 chiffre</p>
+            <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>
             <button class="white" (click)="login()">Se connecter</button>
             <button routerLink="/register">S'inscrire</button>
         </form>

@@ -32,8 +32,6 @@ export class ModifyDevWebComponent implements OnInit {
   onFileAdded(event: Event) {
     //recuperation de la photo ou de la video ci il ya
     this.file = (event.target as HTMLInputElement).files[0];
-    console.log(this.file);
-    
   }
 
   updateDevRessource(){
@@ -50,7 +48,6 @@ export class ModifyDevWebComponent implements OnInit {
     const ressourceId = ressource.split('/')[1]
     this.ressourceService.getOneRessource(ressourceId).subscribe(ressource => {
       this.singleRessource = ressource
-      console.log(this.singleRessource);
     });
   };
 }

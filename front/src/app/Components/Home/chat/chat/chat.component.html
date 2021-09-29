@@ -12,7 +12,8 @@
           <p class="username">travailAvecLeSourire</p>            
       </div>
         <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]">
-            <img [src]="user.picture" alt="" class="avatar">
+            <img [src]="user.picture" alt="" class="avatar" *ngIf="user.picture">
+            <img src="{{fullPath}}" alt="" class="avatar" *ngIf="!user.picture">
             <p class="username">{{user.firstname}} {{user.lastname}}</p>            
         </div>
       </div>
@@ -33,9 +34,9 @@
             <cdk-virtual-scroll-viewport itemSize = "0" class="viewport">
             <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'" >
               <div>
-                <p class="name-message" *ngIf="currentUser !== msg.userId">{{msg.user_chat.firstName}} {{msg.user_chat.lastName}}</p>
+                <p class="name-message" *ngIf="currentUser !== msg.userId">{{msg.User.firstname}} {{msg.User.lastname}}</p>
                 <div class="message">
-                  <img [src]="msg.user_chat.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
+                  <img [src]="msg.User.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
                   <div class="message-container">
                     <p >{{msg.message}}</p>
                     <img [src]="msg.image" alt="" class="msg-img" *ngIf="msg.image">                 
@@ -53,7 +54,7 @@
 
           <div class="chat-footer">
 
-            <div class="row">
+            <div class="row-footer">
               <div class="col-md-10">
                 <div class="form-group mb-0" [formGroup]="messageForm">
                   <input type="text" placeholder="Ecrivez votre message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
@@ -65,12 +66,13 @@
                 <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file" (change)="onFileAdded($event)">
                 <button class="btn btn-primary btn-sm px-3" (click)="sendMessage()" ><fa-icon [icon]="faPaperPlane"></fa-icon></button>  
               </div>
+              
             </div>
-
+            
           </div>
         </ng-container>
       </div>
-
+        <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>
     </div>
 
   </div>

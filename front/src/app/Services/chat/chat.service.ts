@@ -22,7 +22,7 @@ export class ChatService {
     const formData = new FormData();
     formData.append('message', message);
     formData.append('image', attachment);
-    return this.httpClient.post(`${this.chatUrl}/sendMessage`,formData);
+    return this.httpClient.post(`${this.chatUrl}sendMessage`,formData);
   }
 
   getAllMessage(){
@@ -32,7 +32,6 @@ export class ChatService {
       },
       (error) => {
         this.message$.next([]);
-        console.error(error);
       }
     )
   }
@@ -46,7 +45,7 @@ export class ChatService {
     formData.append('contactId', contactId)
     formData.append('roomId', roomId)
 
-    return this.httpClient.post(`${this.chatUrl}/room`,formData);
+    return this.httpClient.post(`${this.chatUrl}room`,formData);
   }
 
 }

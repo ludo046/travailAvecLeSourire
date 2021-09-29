@@ -26,11 +26,9 @@ export class Project2Component implements OnInit {
     this.ressourcesSub = this.ressourceService.allRessourcesDevWeb$.subscribe(
       (ressources) => {
         this.ressources = ressources.filter(ressources => ressources.project === 'projet2');
-        console.log(this.ressources);
         
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );

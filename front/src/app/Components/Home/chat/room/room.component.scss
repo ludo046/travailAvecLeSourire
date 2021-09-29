@@ -23,7 +23,7 @@ $font : "montserrat", serif, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 200vh;
     background: $background-color;
     position: relative;
     overflow: hidden;
@@ -57,6 +57,8 @@ $font : "montserrat", serif, sans-serif;
         display: flex;
         position: absolute;
         z-index: 1;
+        flex-direction: column-reverse;
+        top: 100px;
         .user-list-card{
             border-radius: 10px;
             height: calc(100vh - 100px);
@@ -87,7 +89,7 @@ $font : "montserrat", serif, sans-serif;
             align-items: center;
             color: white;
             &.active{
-                background: #0505ebcc;
+                background: #5353bb62;
             }
             .avatar{
                 height: 50px;
@@ -101,6 +103,8 @@ $font : "montserrat", serif, sans-serif;
         .chat-container{
             height: calc(100vh - 100px);
             position: relative;
+            width: 100%;
+            
             .chat-header{
                 height: 70px;
                 display: flex;
@@ -199,6 +203,14 @@ $font : "montserrat", serif, sans-serif;
             align-items: center;
             justify-content: space-between;
             padding: 0 10px 0 10px;
+            flex-direction: row;
+            .row-footer{
+                display: flex;
+                .col-md-2{
+                    margin-left: 10px;
+                    padding-top: 3px;
+                }
+            }
             .form-control{
                 box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
                 border-radius: 15px;
@@ -210,24 +222,28 @@ $font : "montserrat", serif, sans-serif;
                 color: white;
                 width: 180px;
                 padding: 5px;
+                font-size: 16px;
                 &::placeholder{
                     color: white;
                 }
             }
             button{
                 box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
-                border-radius: 15px;
+                border-radius: 50%;
                 background: rgba(255, 255, 255, 0.1);
                 overflow: hidden;
                 border-top: 1px solid rgba(255, 255, 255, 0.5);
                 border-left: 1px solid rgba(255, 255, 255, 0.5);
                 backdrop-filter: blur(5px);
                 color: white;
-                margin-left: 20px;
-                padding: 5px;
+                margin-left: 10px;
+                padding: 6px 8px;
             }
 
         }
+        @media only screen and (min-width : 1024px){
+            flex-direction: row;
+          }
     }
 }
 .col-md-8{
@@ -241,7 +257,10 @@ $font : "montserrat", serif, sans-serif;
     border-left: 1px solid rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
     color: white;
-    margin-left: 20px;
+    margin-bottom: 30px;
+    @media only screen and (min-width : 1024px){
+        margin-left: 30px;
+      }
 }
 .input-file{
     display: none;

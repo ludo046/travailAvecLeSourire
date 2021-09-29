@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="welcome">
+        <h1>Merci pour ton inscription</h1>
+        <h2>Un mail de vérification a était envoyé.</h2>
+        <p>Merci de checker ta boite mail ainsi que tes spams.</p>
+        <h2>Code d'inscription </h2>
+        
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="form-group" *ngFor="let input of formInput; index as i">
+                    <input type="text" #formRow formControlName="{{input}}" class="form-control" maxlength="1" (keyup)="keyUpEvent($event, i)">
+                </div>
+            </div>
+        </form>
+        <button (click)="codeValidation()">Valider</button>
+    </div>
+</div> 

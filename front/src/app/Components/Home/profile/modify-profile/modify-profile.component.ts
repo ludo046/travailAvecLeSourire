@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/Services/usersServise/user.service';
 
 @Component({
@@ -10,10 +11,12 @@ import { UserService } from 'src/app/Services/usersServise/user.service';
 export class ModifyProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService ) { }
+              private userService: UserService,
+              private router: Router) { }
 
   file: File;
   updateUserForm: FormGroup;
+  errorMsg: any;
 
   ngOnInit(): void {
     this.updateUserForm = this.formBuilder.group({
@@ -33,22 +36,23 @@ export class ModifyProfileComponent implements OnInit {
     const age = this.updateUserForm.get('age').value;
     const password = this.updateUserForm.get('password').value;
     const picture  = this.file;
-    console.log(firstname);
-    console.log(lastname);
-    console.log(email);
-    console.log(age);
-    console.log(password);
-    console.log(picture);
     
-    
-    
-    this.userService.updateUser(firstname, lastname, email, age, password, picture).subscribe()
+    this.userService.updateUser(firstname, lastname, email, age, password, picture).subscribe(
+      result => {
+        console.log(result);
+        this.errorMsg = result
+        this.router.navigate(['profile'])
+      },
+      error => {
+      this.errorMsg = error.error.message
+      console.log(this.errorMsg);
+      }
+    )
   }
 
 
   onFileAdded(event: Event) {
     //recuperation de la photo ou de la video ci il ya
     this.file = (event.target as HTMLInputElement).files[0];
-    console.log(this.file);
   }
 }

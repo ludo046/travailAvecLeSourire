@@ -12,7 +12,8 @@ export class ViewProfileComponent implements OnInit {
 
   userSub: Subscription;
   User: SingleUser;
-  errorMsg
+  errorMsg;
+  fullPathname = 'assets/images/userPicture.png'
 
   constructor(private userService: UserService) { }
 
@@ -22,7 +23,6 @@ export class ViewProfileComponent implements OnInit {
         this.User = user
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );

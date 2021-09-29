@@ -15,7 +15,8 @@
         <label for="password">mot de passe</label>
         <input type="text" name="password" formControlName="password">
         <label for="file" class="label-file">Image de profil</label>
-        <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="picture" (change)="onFileAdded($event)">  
+        <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="picture" (change)="onFileAdded($event)">
+        <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>  
         <button (click)="updateUser()">Valider</button>
     </form>
 </div>

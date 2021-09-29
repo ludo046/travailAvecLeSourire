@@ -2,7 +2,8 @@
 
 <div class="container">
     <div class="profile">
-        <img [src]="User.picture">
+        <img [src]="User.picture" *ngIf="User.picture">
+        <img src="{{fullPathname}}" *ngIf="!User.picture">
         <p>nom : {{User.firstname}} {{User.lastname}}</p>
         <p>email : {{User.email}}</p>
         <p>age : {{User.age}} ans</p>

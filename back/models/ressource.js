@@ -1,81 +1,35 @@
-"use strict";
-
-module.exports = (sequelize, Sequelize) => {
-  const Ressources = sequelize.define(
-    "ressource",
-    {
-      id:{
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
-      userId: {
-        allowNull: false,
-        type : Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id"
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Ressource extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      models.Ressource.belongsTo(models.User, {
+        foreignKey:{
+          allowNull: false
         }
-      },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
-      },
-      content: {
-        allowNull: false,
-        type: Sequelize.STRING(5000)
-      },
-      image: {
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      movie: {
-        allowNull: true,
-        type: Sequelize.STRING(255)
-      },
-      project: {
-        allowNull: false,
-        type: Sequelize.STRING(100)
-      },
-      parcours: {
-        allowNull: false,
-        type: Sequelize.STRING(100),
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      },
-    },
-    {
-      sequelize,
-      tableName: "ressource",
-      timestamps: false,
-      indexes: [
-        {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-        {
-          name: "ordreDate",
-          using: "BTREE",
-          fields: [{ name: "createdAt" }],
-        },
-        {
-          name: "fk_ressource_user_idx",
-          using: "BTREE",
-          fields: [{ name: "userId" }],
-        },
-      ],
+      })
     }
-  );
-  return Ressources;
-}
+    
+  };
+  Ressource.init({
+    UserId: DataTypes.INTEGER,
+    title: DataTypes.STRING,
+    content: DataTypes.STRING,
+    image: DataTypes.STRING,
+    movie: DataTypes.STRING,
+    project: DataTypes.STRING,
+    parcours: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Ressource',
+  });
+  return Ressource;
+};

@@ -35,7 +35,6 @@ allRessourcesDevFront$ = new Subject<any>();
       },
       (error) => {
         this.allRessourcesDevWeb$.next([]);
-        console.error(error);
       }
     )
   }
@@ -46,7 +45,6 @@ allRessourcesDevFront$ = new Subject<any>();
       },
       (error) => {
         this.allRessourcesDevFront$.next([]);
-        console.error(error);
       }
     )
   }

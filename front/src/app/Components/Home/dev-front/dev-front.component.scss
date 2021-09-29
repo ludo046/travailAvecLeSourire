@@ -23,99 +23,7 @@ $font : "montserrat", serif, sans-serif;
         color: red;
     }
 }
-.post{
-    position: absolute;
-    z-index: 1;
-    top: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    input{
-        width: 80%;
-        height: 30px;
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        color: $font-primary-color;
-        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-        outline: none;
-        padding: 10px;
-        &::placeholder{
-            color: white;
-        }
-        margin-bottom: 10px;
-    }
-    textarea{
-        width: 80%;
-        height: 100px;
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        color: $font-primary-color;
-        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-        outline: none;
-        padding: 10px;
-        &::placeholder{
-            color: white;
-        }
-    }
-    .button{
-        width: 80%;
-        height: 30px;
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-top: 1px solid rgba(255, 255, 255, 0.5);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(5px);
-        color: $font-primary-color;
-        box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-        outline: none;
-        padding: 10px;
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        justify-content: space-around;
-        .input-file{
-            display: none;
-        }
-        .label-file{
-            background: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-            border-radius: 15px;
-            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-left: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            outline: none;
-        }
-        button{
-            background: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-            border-radius: 15px;
-            border: none;
-            box-shadow: 20px 20px 50px rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-left: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            outline: none;
-            color: white;
-            height: 30px;
-            width: 100px;
-            font-size: 1rem;
-        }
-    }
 
-}
 .container{
     display: flex;
     justify-content: center;
@@ -144,7 +52,7 @@ $font : "montserrat", serif, sans-serif;
     }
     .projects{
         color: white;
-        width: 300px;
+        width: 90%;
         padding: 10px;
         z-index: 2;
         align-items: center;
@@ -160,7 +68,27 @@ $font : "montserrat", serif, sans-serif;
         padding: 10px;
         display: flex;
         flex-wrap: wrap;
-        margin: 390px 0 0;
+        flex-direction: column;
+    }
+    .send{
+        border-radius: 10px;
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        box-shadow: 5px 5px 50px rgba(255, 255, 255, 0.5);
+        outline: none;
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        color: $font-primary-color;
+        width: 200px;
+        cursor: pointer;
+        margin: 30px 0;
+    }
+    .all-card{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .card{
         position: relative;
@@ -179,25 +107,33 @@ $font : "montserrat", serif, sans-serif;
         .content{
             padding: 10px;
             text-align: center;
-            transform: translateY(50px);
-
-            .card,&:hover{
+            
+            @media only screen and (min-width : 1024px) {
+                transform: translateY(50px);
+                .card,&:hover{
                 transform: translateY(0);
                 opacity: 1;
             }
+                }
+
+
             .back{
                 h2{
                 position: absolute;
                 top: -10px;
                 right: 10px;
                 font-size: 6rem;
-                color: rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.4);
                 pointer-events: none;
             }   
             }
             .front{
+                @media only screen and (min-width : 1024px) {
                 opacity: 0;
                 transition: 0.5s;
+                }
+    
+
                 h3{
                 font-size: 1.8rem;
                 z-index: 1;
@@ -215,15 +151,21 @@ $font : "montserrat", serif, sans-serif;
                 border-left: 1px solid rgba(255, 255, 255, 0.5);
                 color: $font-primary-color;
                 width: 100px;
+                cursor: pointer;
             }
-            .card:hover,&:hover{
-                transform: translateY(0);
-                opacity: 1;
-            }
+            @media only screen and (min-width : 1024px) {
+                .card:hover,&:hover{
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                }
+
             }
         }
     }
 }
+
+
   /* Reset Select */
   select {
     -webkit-appearance: none;

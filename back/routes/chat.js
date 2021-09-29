@@ -56,7 +56,7 @@ module.exports = {
                   function (userFound, done) {
                     if (userFound) {
                       models.Chat.create({
-                        userId: userFound.id,
+                        UserId: userFound.id,
                         message: message,
                         image: attachment,
                         movie: movie,
@@ -96,8 +96,8 @@ module.exports = {
           include: [
             {
               model: models.User,
-              as: "user_chat",
-              attributes: ["firstName", "lastName", "picture"],
+              //as: "user_chat",
+              attributes: ["firstname", "lastname", "picture"],
             }
           ],
         })
@@ -109,7 +109,7 @@ module.exports = {
             }
           })
           .catch(function (err) {
-            console.log(err);
+
             res.status(500).json({ error: "invalid fields" });
           });
       },
@@ -122,8 +122,6 @@ module.exports = {
             let userId = Number(jwtUtils.getUserId(headerAuth));
             let contactId = req.body.contactId;
             let roomId = req.body.roomId
-            console.log(contactId);
-            console.log(roomId);
     
             let message = null;
             let attachment = null;
@@ -178,7 +176,7 @@ module.exports = {
                 function (userFound, done) {
                   if (userFound) {
                     models.Chat.create({
-                      userId: userFound.id,
+                      UserId: userFound.id,
                       contactId: contactId,
                       message: message,
                       image: attachment,

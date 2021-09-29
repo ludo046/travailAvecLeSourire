@@ -49,6 +49,7 @@ export class RoomComponent implements OnInit {
   faPaperPlane = faPaperPlane;
   faPhotoVideo = faPhotoVideo;
   fullPathname ='assets/images/smiley.jpg'
+  fullPath = 'assets/images/userPicture.png'
   //result: []
 
 
@@ -58,19 +59,15 @@ export class RoomComponent implements OnInit {
     this.usersSub = this.usersService.allUsers$.subscribe(
       (users) => {
         this.users = users
-        console.log(this.users);
         this.singleUser = this.users.filter(function(user){
           const url = window.location.href.split('room/')[1]
           if(user){
             return user.id === parseInt(url)
           }
           
-        })
-        console.log(this.singleUser);
-        
+        })     
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );
@@ -90,18 +87,15 @@ export class RoomComponent implements OnInit {
         let chatId = url.split('/')[0]
         const userId = url.split('/')[1]
         const contactId = url.split('/')[0]
-        console.log(chatId);
         
         this.messages = messages.filter(function(messages){
           if(messages.roomId){
             return messages.roomId === userId + '-' + contactId || messages.roomId === contactId + '-' + userId
           }
         })
-        console.log(this.messages);
         
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );
@@ -111,7 +105,6 @@ export class RoomComponent implements OnInit {
   onFileAdded(event: Event) {
     //recuperation de la photo ou de la video ci il ya
     this.file = (event.target as HTMLInputElement).files[0];
-    console.log(this.file);
     
   }
 
@@ -129,10 +122,17 @@ export class RoomComponent implements OnInit {
       userId: this.currentUser,
       roomId: roomId,
     }
-    this.chatService.sendRoomMessage(content,attachment,this.contactId, roomId).subscribe(() => {
-      //this.getMessage()
-      this.messageText = '';
-    });
+    this.chatService.sendRoomMessage(content,attachment,this.contactId, roomId).subscribe(
+      result => {
+        console.log(result);
+        this.errorMsg = result,
+        this.messageText = '';
+      },
+      error => {
+      this.errorMsg = error.error.message
+      console.log(this.errorMsg);
+      }
+    );
 
     this.socket.emit('room message', (socket));
     this.socket.emit('image', (attachment))
@@ -142,16 +142,14 @@ export class RoomComponent implements OnInit {
     const url = window.location.href.split('room/')[1]
         const userId = url.split('/')[1]
         const contactId = url.split('/')[0]
-    this.socket = io('http://localhost:8080', {transports:['websocket']})
+    this.socket = io('http://travailaveclesourire.fr:8080', {transports:['websocket']})
     this.socket.on('message room', (message: string) => {
       this.chatRoomMessage.push(message)
-      //console.log(this.chatRoomMessage);
       this.roomMessages = this.chatRoomMessage.filter(function(roomMessage){
         if(roomMessage.msg.roomId){
           return roomMessage.msg.roomId === userId + '-' + contactId || roomMessage.msg.roomId === contactId + '-' + userId
         }
       })
-      console.log(this.roomMessages);
       
     })
 

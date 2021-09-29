@@ -12,7 +12,8 @@
           <p class="username">travailAvecLeSourire</p>            
       </div>
         <div class="user-card" *ngFor="let user of users" [ngClass]="currentUser === user.id && 'same-users'" [routerLink]="['/chat/room', user.id,currentUser]" (click)="chatReload()">
-            <img [src]="user.picture" alt="" class="avatar">
+            <img [src]="user.picture" alt="" class="avatar" *ngIf="user.picture">
+            <img src="{{fullPath}}" alt="" class="avatar" *ngIf="!user.picture">
             <p class="username" >{{user.firstname}} {{user.lastname}}</p>            
         </div>
       </div>
@@ -23,16 +24,22 @@
       <div class="chat-container">
         <ng-container >
           <div class="chat-header" *ngFor="let user of singleUser">
-            <img [src]="user.picture" alt="" class="avatar-header">
+            <img [src]="user.picture" alt="" class="avatar-header" *ngIf="user.picture">
+            <img src="{{fullPath}}" alt="" class="avatar-header" *ngIf="!user.picture">
             <p class="username">{{user.firstname}} {{user.lastname}}</p>
           </div>
 
           <div class="chat-body">
             <cdk-virtual-scroll-viewport itemSize = "0" class="viewport">
             <div *cdkVirtualFor="let msg of messages" [ngClass]="currentUser === msg.userId && 'same-user'" >
-              <p *ngIf="currentUser !== msg.userId" class="name-message">{{msg.user_chat.firstName}} {{msg.user_chat.lastName}}</p>
+              <p *ngIf="currentUser !== msg.userId" class="name-message">{{msg.User.firstname}} {{msg.User.lastname}}</p>
               <div class="message">
-                <img [src]="msg.user_chat.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
+                <div *ngIf="msg.User.picture">
+                  <img [src]="msg.User.picture" alt="" class="avatar-message" *ngIf="currentUser !== msg.userId">
+                </div>
+                <div *ngIf="!msg.User.picture">
+                  <img src="{{fullPath}}" alt="" class="avatar-message" *ngIf="!message.User.picture">
+                </div>
                 <div class="message-container">
                   <p >{{msg.message}}</p>
                   <img [src]="msg.image" alt="" class="msg-img" *ngIf="msg.image">
@@ -50,7 +57,7 @@
 
           <div class="chat-footer">
 
-            <div class="row">
+            <div class="row-footer">
               <div class="col-md-10">
                 <div class="form-group mb-0" [formGroup]="messageForm">
                   <input type="text" placeholder="Ecrivez votre message" class="form-control" formControlName="message" [(ngModel)]="messageText"/>
@@ -58,16 +65,17 @@
               </div>
 
               <div class="col-md-2 text-center align-self-center">
-                  <label for="file" class="label-file"><fa-icon [icon]="faPhotoVideo"></fa-icon></label>
-                  <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file" (change)="onFileAdded($event)">
-                  <button class="btn btn-primary btn-sm px-3" (click)="sendRoomMessage()" ><fa-icon [icon]="faPaperPlane"></fa-icon></button>           
+                <label for="file" class="label-file"><fa-icon [icon]="faPhotoVideo"></fa-icon></label>
+                <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file" (change)="onFileAdded($event)">
+                <button class="btn btn-primary btn-sm px-3" (click)="sendRoomMessage()" ><fa-icon [icon]="faPaperPlane"></fa-icon></button>  
               </div>
+              
             </div>
-
+            
           </div>
         </ng-container>
       </div>
-
+      <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>
     </div>
 
   </div>

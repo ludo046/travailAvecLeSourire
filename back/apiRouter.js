@@ -15,6 +15,7 @@ exports.router = (function(){
     apiRouter.route('/users/all/').get(userCtrl.getAllUser);
     apiRouter.route('/users/me').get(userCtrl.getUserProfile);
     apiRouter.route('/users/modify').put(multer, userCtrl.modifyProfile);
+    apiRouter.route('/users/verification').post(userCtrl.verificationUser);
 
     apiRouter.route('/ressources/new/').post(multer,ressourceCtrl.postRessources);
     apiRouter.route('/ressources/devWeb').get(ressourceCtrl.listRessourceDeveloppeurWeb);

@@ -12,13 +12,21 @@ export class UserService {
   private userUrl = environment.userUrl;
   allUsers$ = new Subject<any>();
   singleUser$ = new Subject<any>();
+  userConnection$ = new Subject<any>();
+  register$ = new Subject<any>();
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
   register(registerModel: registerModel){
-    return this.httpClient.post(`${this.userUrl}register`, registerModel);
+    return this.httpClient.post(`${this.userUrl}register`, registerModel).subscribe(
+      (user) => {
+        this.register$.next(user);
+      }),
+      (error) => {
+        this.register$.next([]);
+      }
   }
 
   login(loginModel: loginModel){
@@ -31,8 +39,7 @@ export class UserService {
         this.allUsers$.next(users);
       },
       (error) => {
-        this.allUsers$.next([]);
-        console.error(error);
+        this.allUsers$.next([error]);
       }
     )
   }
@@ -44,7 +51,6 @@ export class UserService {
       },
       (error) => {
         this.singleUser$.next([]);
-        console.log(error)
       }
     )
   }
@@ -59,5 +65,15 @@ export class UserService {
       formData.append('image', picture);
       
       return this.httpClient.put(`${this.userUrl}modify`, formData)
+  }
+
+  tokenValidation(code : string){
+    return this.httpClient.post(`${this.userUrl}verification`, {code}).subscribe(
+      (user) => {
+        this.userConnection$.next(user);
+      }),
+      (error) => {
+        this.singleUser$.next([]);
+      }
   }
 }

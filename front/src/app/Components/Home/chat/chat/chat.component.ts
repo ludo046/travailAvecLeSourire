@@ -32,6 +32,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   faPaperPlane = faPaperPlane;
   faPhotoVideo = faPhotoVideo;
   fullPathname ='assets/images/smiley.jpg'
+  fullPath = 'assets/images/userPicture.png'
 
 
 
@@ -40,7 +41,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   private chatUrl = environment.chatUrl;
   message$ = new Subject<any>();
   messages$ = new Subject<[any]>()
-  chatMessage = []
+  chatMessage = [];
 
   constructor(
     private chatService: ChatService,
@@ -56,11 +57,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.usersSub = this.usersService.allUsers$.subscribe(
       (users) => {
         this.users = users
-        console.log(this.users);
-        
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );
@@ -78,7 +76,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.messages = messages.filter(messages => messages.contactId === null);
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );
@@ -89,8 +86,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   onFileAdded(event: Event) {
     //recuperation de la photo ou de la video ci il ya
     this.file = (event.target as HTMLInputElement).files[0];
-    console.log(this.file);
-    
   }
 
   sendMessage():void{
@@ -100,9 +95,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
     const content = this.messageForm.get('message').value;
     const attachment = this.file;
-    this.chatService.sendMessage(content,attachment).subscribe(() => {
-      this.messageText = '';
-    });
+    this.chatService.sendMessage(content,attachment).subscribe(
+      result => {
+        console.log(result);
+        this.errorMsg = result,
+        this.messageText = '';
+      },
+      error => {
+      this.errorMsg = error.error.message
+      console.log(this.errorMsg);
+      }
+    );
     this.socket.emit('my message', (socket));
   }
 
@@ -110,11 +113,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.messageSub = this.chatService.message$.subscribe(
       (messages) => {
         this.messages = messages
-        console.log(this.messages);
         
       },
       (error) => {
-        console.log(error);
         this.errorMsg = JSON.stringify(error);
       }
     );
@@ -123,10 +124,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   setupSocketConnection(){
-    this.socket = io('http://localhost:8080', {transports:['websocket']})
+    this.socket = io('http://travailaveclesourire.fr:8080', {transports:['websocket']})
     this.socket.on('my broadcast', (message: string) => {
       this.chatMessage.push(message)
-      console.log(this.chatMessage);
     })
   }
 
