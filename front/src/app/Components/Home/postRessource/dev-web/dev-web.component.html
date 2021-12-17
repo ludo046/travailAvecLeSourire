@@ -1,4 +1,7 @@
 <app-header></app-header>
+<div class="return">
+    <fa-icon [icon]="arrowLeft" routerLink="/home"></fa-icon>
+</div>
 <div class="container">
   <div class="post" [formGroup]="ressourceForm">
     <input type="text" class="form-control" formControlName="title" placeholder="titre (obligatroire)"> 

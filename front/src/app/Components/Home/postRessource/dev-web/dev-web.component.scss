@@ -8,21 +8,13 @@ $font : "montserrat", serif, sans-serif;
     font-family: $font; 
 }
 
-.return{
+fa-icon{
     position: absolute;
-    top: 0px;
-    z-index: 0;
-    background: chartreuse;
-    height: 20px;
-    width: 20px;
-    .icon{
-        position: absolute;
-        z-index: 3;
-        font-size: 1.2rem;
-        bottom: 10px;
-        right: 60px;
-        color: red;
-    }
+    z-index: 1;
+    font-size: 1.2rem;
+    top: 8px;
+    left: 10px;
+    color: $font-primary-color;
 }
 .post{
     position: absolute;

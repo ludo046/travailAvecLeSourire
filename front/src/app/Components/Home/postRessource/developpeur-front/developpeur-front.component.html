@@ -1,4 +1,7 @@
 <app-header></app-header>
+<div class="return">
+    <fa-icon [icon]="arrowLeft" routerLink="/home"></fa-icon>
+</div>
 <div class="container">
 <div class="post" [formGroup]="ressourceForm"> 
     <input type="text" class="form-control" formControlName="title" placeholder="titre (obligatoire)"> 
@@ -13,6 +16,13 @@
             <option value="projet5">projet 5</option>
             <option value="projet6">projet 6</option>
             <option value="projet7">projet 7</option>
+            <option value="projet7">projet 8</option>
+            <option value="projet7">projet 9</option>
+            <option value="projet7">projet 10</option>
+            <option value="projet7">projet 11</option>
+            <option value="projet7">projet 12</option>
+            <option value="projet7">projet 13</option>
+            <option value="projet7">projet 14</option>
         </select>
     </div>
     <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>
