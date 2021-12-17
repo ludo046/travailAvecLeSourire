@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -52,6 +53,8 @@ import { MailComponent } from './Components/mail/mail.component';
 //import { PostRessourceComponent } from './Components/Home/post-ressource/post-ressource.component';
 import { DevWebComponent } from './Components/Home/postRessource/dev-web/dev-web.component';
 import { DeveloppeurFrontComponent } from './Components/Home/postRessource/developpeur-front/developpeur-front.component';
+import { GetOneRessourceComponent } from './Components/Home/ressourceAction/get-one-ressource/get-one-ressource.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 export const ROUTES : Routes = [
@@ -79,6 +82,7 @@ export const ROUTES : Routes = [
   {path : 'mail', component: MailComponent},
   {path : 'developpeur-front/postressource', component: DeveloppeurFrontComponent},
   {path : 'developpeur-web/postressource', component: DevWebComponent},
+  {path : 'view-ressource/:parcours/:project/:id', component: GetOneRessourceComponent},
   {path : '', component: LoginComponent}
 ]
 
@@ -125,10 +129,12 @@ export const ROUTES : Routes = [
     MailComponent,
     //PostRessourceComponent,
     DevWebComponent,
-    DeveloppeurFrontComponent
+    DeveloppeurFrontComponent,
+    GetOneRessourceComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     RouterModule.forRoot(ROUTES),
     FontAwesomeModule,
     FormsModule,
@@ -137,6 +143,7 @@ export const ROUTES : Routes = [
     MatDialogModule,
     BrowserAnimationsModule,
     ScrollingModule,
+    PdfViewerModule,
   ],
   exports: [
     RouterModule

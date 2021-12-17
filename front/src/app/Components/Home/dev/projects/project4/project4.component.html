@@ -6,9 +6,19 @@
     <div class="all-card" >
         <div >
         <div class="card" *ngFor="let ressource of ressources">
-                <h1 class="title" id="title">{{ressource.title}}</h1>
-                <p class="content" id="content">{{ressource.content}}</p>
-                <img [src]="ressource.image" *ngIf="ressource.image !== null">
+            <h1 class="title" id="title">{{ressource.title}}</h1>
+            <div class="ressource-body">
+                <div class="attachment">
+                    <img [src]="ressource.image" *ngIf="ressource.image">
+                    <div class="pdf" *ngIf="ressource.pdf">
+                       <pdf-viewer [src]="ressource.pdf" [render-text]="true" [original-size]="false"></pdf-viewer> 
+                    </div> 
+                </div>
+                <div class="ressource-content">
+                    <p class="content" id="content">{{ressource.content}}</p>
+                    <button [routerLink]="['/view-ressource',ressource.parcours,ressource.project,ressource.id]">voir plus</button>
+                </div>
+            </div>
                 <div class="date">
                     <p>Publier par : {{ressource.User.firstname}} {{ressource.User.lastname}}</p>
                     <p>Le {{ressource.createdAt | date:'dd/MM/yyyy'}} à {{ressource.createdAt | date:'HH:mm'}}</p>

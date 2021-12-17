@@ -398,10 +398,17 @@ module.exports = {
       return res.status(400).json({error: `nous n'êtes pas identifié`})
     }
     models.Ressource.findOne({
-      where: {id: ressourceId}
+      where: {id: ressourceId},
+      include: [
+        {
+          model: models.User,
+          attributes: ["firstname", "lastname"],
+          //as: "user_ressource"
+        }
+    ]
     })
     .then(function(ressource){
-      return res.status(200).json(ressource)
+      return res.status(200).json([ressource])
     })
     .catch(function(err){
       return res.status(400).json({error: "ressource inexistante"})

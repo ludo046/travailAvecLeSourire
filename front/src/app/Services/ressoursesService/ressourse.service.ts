@@ -13,6 +13,7 @@ private ressoucesUrl = environment.ressourceUrl;
 public formData : any;
 allRessourcesDevWeb$ = new Subject<any>();
 allRessourcesDevFront$ = new Subject<any>();
+singleRessource$ = new Subject<any>();
 
   constructor(
     private httpClient: HttpClient
@@ -64,5 +65,15 @@ allRessourcesDevFront$ = new Subject<any>();
   }
   getOneRessource(ressourceId: string){
     return this.httpClient.get(`${this.ressoucesUrl}`+ressourceId)
+  }
+  getSingleRessource(ressourceId: string){
+    return this.httpClient.get(`${this.ressoucesUrl}`+ressourceId).subscribe(
+      (ressource) => {
+        this.singleRessource$.next(ressource);
+      },
+      (error) => {
+        this.singleRessource$.next([]);
+      }
+    )
   }
 }

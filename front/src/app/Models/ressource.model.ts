@@ -9,11 +9,14 @@ export interface postRessourseModel{
 export interface Ressources{
     id: number;
     userId: number;
+    title: string;
     content: string;
-    attachment: string;
+    image: string;
     movie: string;
+    pdf: string;
     project: string;
     parcour: string;
+    createdAt: Date;
     User:{
         firstname: string,
         lastname: string

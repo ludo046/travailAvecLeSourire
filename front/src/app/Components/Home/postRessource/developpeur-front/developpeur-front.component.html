@@ -18,8 +18,8 @@
     <p class="error" *ngIf="errorMsg">{{errorMsg}}</p>
     <div class="button">
         <div>
-            <label for="file" class="label-file">Image / Vidéo</label>
-            <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="detectFiles($event)">
+            <label for="file" class="label-file">Image / Vidéo / Pdf</label>
+            <input id="file" type="file" accept=".jpg, .jpeg, .png, .gif, .mp4, .pdf" id="file" name="image" class="input-file form-control" formControlName="attachment" (change)="detectFiles($event)">
             
         </div>
         <button (click)="postRessource()">Envoyer</button>
